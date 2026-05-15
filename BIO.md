@@ -1,48 +1,26 @@
-# \# Manh Thai Nguyen
-
-# \*\*Branch Director  |  Banking \& Financial Services  |  MBA Candidate\*\*
+# Over the past 17 years, I have built my career across Vietnam’s leading commercial banks, including MB Bank, Techcombank, and TPBank. Starting in frontline relationship management and progressing into branch leadership, I have developed hands-on experience across Retail Banking, SME Banking, and Corporate \& Investment Banking (CIB).
 
 # 
 
-# TP Bank Hanoi  •  Shidler College of Business, UH Mānoa (VEMBA 33)  •  Hanoi, Vietnam
+# Currently, I serve as Branch Director at TPBank Hanoi, where I oversee branch operations and business development across multiple customer segments in one of Vietnam’s most competitive banking markets. My professional focus includes commercial banking strategy, portfolio growth, client relationship management, and team leadership.
 
 # 
 
-# ✉ manhthai.bg@gmail.com  •  manhthai@hawaii.edu  •  ✆ +84 981 946 888
+# Before joining TPBank leadership in 2022, I led Corporate Banking Centers at Techcombank across the Ba Dinh and regional business segments, strengthening my expertise in corporate client development and market expansion.
 
 # 
 
-# \---
+# I hold a Bachelor’s degree in Investment Economics from the National Economics University and am currently completing my MBA at the Shidler College of Business (VEMBA Cohort 33).
 
 # 
 
-# \## Introduction
+# I believe great banking is built on trust first, transactions second. My long-term goal is to contribute to the innovation and sustainable growth of Vietnam’s banking industry through strategic leadership and continuous learning.
 
 # 
 
-# I am Manh Thai Nguyen, a banking executive with 17 years of progressive experience across Vietnam's leading commercial banks — MB Bank, Techcombank, and TPBank. Currently serving as Branch Director at TPBank Hanoi, I have built my career from frontline relationship management to senior branch leadership, consistently rated Good to Excellent in performance evaluations throughout my career.
+# I welcome opportunities to connect and exchange ideas on banking leadership, commercial strategy, and financial innovation in Vietnam.
 
 # 
 
-# \## Focus Areas
-
-# 
-
-# My expertise spans commercial banking strategy, SME and corporate client development (CIB), retail banking growth, and branch network leadership in competitive urban markets.
-
-# 
-
-# \## Achievements
-
-# 
-
-# I held senior roles including Deputy Branch Director and Transaction Office Director at MB Bank, followed by Branch Director and SME Customer Center Director at Techcombank (2018–2022). I hold a Bachelor's degree in Investment Economics from the National Economics University, Hanoi, and am currently completing my MBA at the Shidler College of Business, University of Hawaiʻi at Mānoa (VEMBA Cohort 33).
-
-# 
-
-# \## Goals
-
-# 
-
-# Short-term, I aim to advance into a Regional Director role in Hanoi. Long-term, I am committed to driving innovation and sustainable growth in Vietnam's rapidly evolving financial sector, leveraging strategic frameworks from my MBA.
+# Email: manhthai.bg@gmail.com
 
