@@ -1,198 +1,108 @@
-# \# Manh Thai Nguyen
+# Manh Thai Nguyen
 
-# \*\*Branch Director | Banking \& Financial Services\*\*
+Branch Director | Banking & Financial Services Leader | MBA Candidate
 
-# 
+📧 manhthai.bg@gmail.com | manhthai@hawaii.edu | 📞 (+84) 981 946 888 | 📍 Hanoi, Vietnam
 
-# 📍 Hanoi, Vietnam \&nbsp;|\&nbsp; 17 Years in Banking
+---
 
-# 
+## Professional Summary
 
-# \---
+Senior banking leader with 17 years of experience across Vietnam's leading commercial banks, including TPBank, Techcombank, and MB Bank. Demonstrated expertise in branch leadership, commercial banking strategy, portfolio growth, and multi-segment customer management across Retail, SME, and Corporate & Institutional Banking (CIB).
 
-# 
+Proven ability to build high-performing teams, drive sustainable business growth, strengthen risk governance, and lead complex branch operations in highly competitive banking markets. Recognized consistently for strong performance and leadership progression from Relationship Manager to Branch Director.
 
-# \## Professional Summary
+Currently pursuing an Executive MBA at the Shidler College of Business, University of Hawaiʻi at Mānoa, with a focus on strategic leadership and organizational effectiveness.
 
-# 
+---
 
-# Results-driven banking executive with 17 years of progressive experience across Vietnam's leading commercial banks — MB Bank, Techcombank, and TP Bank. Proven track record of building high-performance teams, leading organizational change, and directing full branch operations in competitive urban markets. Deep expertise in organizational behavior and people management, with a consistent ability to align team culture with business objectives and drive performance through structured coaching and accountability frameworks. Unique background spanning all three core relationship management tracks — Retail (KHCN), SME, and Corporate (CIB) — combined with senior leadership experience from PGD Director through Branch and Regional Center Director levels.
+## Education
 
-# 
+**Shidler College of Business, University of Hawaiʻi at Mānoa** — Honolulu, Hawaii, USA
 
-# \---
+Executive MBA Candidate (VEMBA Cohort 33) | Expected 2027
 
-# 
+Relevant Focus Areas: Strategic Leadership · Organizational Behavior · Business Management · Data-Driven Decision Making
 
-# \## Work Experience
+**National Economics University** — Hanoi, Vietnam
 
-# 
+Bachelor of Investment Economics | 2009
 
-# \### TP Bank (Tien Phong Commercial Joint Stock Bank)
+---
 
-# \*\*Branch Director\*\* \&nbsp;|\&nbsp; Hanoi \&nbsp;|\&nbsp; \*May 2022 – Present · 4 years\*
+## Professional Experience
 
-# 
+### TPBank — Hanoi, Vietnam
 
-# \- Lead full branch operations including business development, credit management, compliance, and team performance across retail and corporate segments
+**Branch Director** | May 2022 – Present
 
-# \- Oversee multi-segment client portfolio covering personal banking (KHCN) and corporate clients (SME / CIB)
+- Lead end-to-end branch operations across Retail, SME, and Corporate Banking segments
+- Drive business growth through customer acquisition, portfolio expansion, and relationship management strategies
+- Manage cross-functional teams spanning business development, operations, compliance, and credit management
+- Strengthen portfolio quality and risk control while maintaining operational efficiency and sustainable growth
 
-# \- Drive year-over-year revenue growth and customer acquisition targets across the Hanoi market
+### Techcombank — Hanoi, Vietnam
 
-# 
+**Director, SME Corporate Banking Center** | Oct 2021 – May 2022
 
-# \---
+- Directed SME banking operations including lending, deposits, and client relationship management
+- Coordinated cross-functional collaboration among credit, operations, and sales teams to accelerate portfolio growth
 
-# 
+**Banking Center Director / Segment Director** | Nov 2019 – Oct 2021
 
-# \### Techcombank (Vietnam Technological and Commercial Joint Stock Bank)
+- Managed multi-segment banking operations across Retail and Corporate Banking divisions
+- Developed strategic growth initiatives to improve customer acquisition, portfolio performance, and team productivity
 
-# \*\*Director, SME Corporate Banking Center — Ba Dinh\*\* \&nbsp;|\&nbsp; \*Oct 2021 – May 2022 · 7 months\*
+**Multi-Function Branch Director** | Apr 2018 – Oct 2019
 
-# 
+- Oversaw branch-wide operations including business development, compliance, human resources, and credit supervision
+- Delivered strong operational and commercial performance across multiple banking segments
 
-# \- Managed SME corporate client center, overseeing lending, deposits, and relationship management teams
+### MB Bank — Hanoi, Vietnam
 
-# \- Led cross-functional coordination between credit, operations, and business development divisions
+**Deputy Director, Retail Business Development** | May 2016 – Apr 2018
 
-# 
+- Led retail banking growth initiatives and coordinated regional sales and customer acquisition programs
+- Supported strategic business expansion and frontline performance management
 
-# \*\*Banking Center Director / Segment Director\*\* \&nbsp;|\&nbsp; \*Nov 2019 – Oct 2021 · 1 year 11 months\*
+**PGD Director, Dinh Cong** | Jan 2014 – May 2016
 
-# 
+- Managed branch operations, customer service quality, and retail lending growth
+- Improved portfolio performance through relationship-driven banking strategies
 
-# \- Directed multi-segment banking center operations across retail and corporate client divisions
+**Deputy Head, SME Corporate Banking — Thang Long** | May 2013 – Jan 2014
 
-# \- Developed and executed strategic plans for client acquisition and portfolio growth
+- Supported SME client development, credit analysis, and relationship management activities
+- Assisted in structuring lending proposals and maintaining portfolio quality
 
-# 
+**Relationship Manager (Retail / SME / CIB)** | Jul 2009 – May 2013
 
-# \*\*Multi-Function Branch Director\*\* \&nbsp;|\&nbsp; \*Apr 2018 – Oct 2019 · 1 year 6 months\*
+- Developed broad commercial banking expertise across Retail, SME, and Corporate Banking segments
+- Managed customer acquisition, credit analysis, and portfolio development activities
+- Consistently exceeded business development and relationship management targets
 
-# 
+---
 
-# \- Managed full branch P\&L including HR, compliance, credit, and business development functions
+## Leadership Highlights
 
-# \- Delivered consistent above-target performance across key retail and corporate banking metrics
+- Advanced from entry-level Relationship Manager to Branch Director within 17 years across three leading Vietnamese commercial banks
+- Built hands-on leadership experience across Retail, SME, and Corporate & Institutional Banking (CIB)
+- Led multi-functional banking teams covering sales, operations, compliance, and credit management
+- Consistently achieved strong annual performance ratings throughout banking career
+- Selected for Executive MBA program at Shidler College of Business, University of Hawaiʻi at Mānoa
 
-# 
+---
 
-# \---
+## Skills
 
-# 
+**Banking & Leadership:** Commercial Banking Strategy · Branch Operations · Portfolio Growth · Credit Management · Relationship Management · Team Leadership · Business Development · Risk Management
 
-# \### MB Bank (Military Commercial Joint Stock Bank)
+**Technology:** Microsoft Office Suite · Banking CRM Systems · Credit & Portfolio Management Tools
 
-# \*\*Senior Leadership Roles\*\* \&nbsp;|\&nbsp; \*May 2013 – Apr 2018 · 5 years\*
+**Languages:** Vietnamese (Native) · English (Professional Working Proficiency)
 
-# 
+---
 
-# \- \*\*Deputy Director, Retail Business Development\*\* \*(May 2016 – Apr 2018)\* — Led retail banking strategy and KHCN business development across the branch network; coordinated regional sales campaigns
+## Interests
 
-# \- \*\*PGD Director, Dinh Cong\*\* \*(Jan 2014 – May 2016)\* — Managed full PGD operations, team leadership, and customer service quality; grew branch deposits and lending portfolio year-over-year
-
-# \- \*\*Deputy Head, SME Corporate Banking — Thang Long\*\* \*(May 2013 – Jan 2014)\* — Supported SME lending decisions, client relationship management, and credit proposals
-
-# 
-
-# \*\*Relationship Manager\*\* \&nbsp;|\&nbsp; Thang Long Branch \&nbsp;|\&nbsp; \*Jul 2009 – May 2013 · 3 years 10 months\*
-
-# 
-
-# \- Progressed through all three core RM tracks: \*\*Retail RM (KHCN)\*\*, \*\*SME RM\*\*, and \*\*Corporate RM (CIB)\*\*
-
-# \- Built foundational expertise in credit analysis, client acquisition, KYC, and portfolio management
-
-# \- Consistently exceeded individual sales and portfolio growth targets
-
-# 
-
-# \---
-
-# 
-
-# \## Education
-
-# 
-
-# \*\*Bachelor of Science — Investment Economics\*\*
-
-# National Economics University (Đại học Kinh tế Quốc dân), Hanoi
-
-# \*Sep 2005 – Jul 2009\*
-
-# 
-
-# \*\*Master of Business Administration (MBA) Candidate — VEMBA Cohort 33\*\*
-
-# Shidler College of Business, University of Hawaii at Manoa
-
-# \*Expected Graduation: 2027 | BUS-629 | BUS-122B\*
-
-# 
-
-# \---
-
-# 
-
-# \## Career Objective
-
-# 
-
-# Seeking a \*\*Branch Director\*\* or \*\*Regional Director\*\* position in Hanoi to leverage 17 years of comprehensive banking expertise — spanning frontline relationship management through senior branch leadership — in driving sustainable portfolio growth, developing high-performing teams, and contributing to strategic expansion within Vietnam's financial sector.
-
-# 
-
-# \---
-
-# 
-
-# \## Core Competencies
-
-# 
-
-# | Area | Skills |
-
-# |---|---|
-
-# | \*\*Leadership\*\* | Branch \& Center Management, Team Development, P\&L Ownership |
-
-# | \*\*Organizational Behavior\*\* | Team Dynamics, Motivational Frameworks, Culture Building, Conflict Resolution |
-
-# | \*\*Change Management\*\* | Organizational Transformation, Process Redesign, Stakeholder Alignment, Transition Planning |
-
-# | \*\*High-Performance Management\*\* | Goal Setting (OKR/KPI), Performance Coaching, Accountability Systems, Talent Retention |
-
-# | \*\*Business Development\*\* | Retail (KHCN), SME \& Corporate (CIB) Portfolio Growth |
-
-# | \*\*Banking Operations\*\* | Credit Management, Compliance, Retail \& Corporate Banking |
-
-# | \*\*Strategy\*\* | Market Expansion, Sales Planning, Multi-segment Coordination |
-
-# 
-
-# \---
-
-# 
-
-# \## Career Highlights
-
-# 
-
-# \- 17-year career trajectory from Relationship Manager to Branch Director across Vietnam's top commercial banks
-
-# \- One of few banking executives with hands-on RM experience across all three tracks: Retail, SME, and CIB
-
-# \- Senior leadership roles at three major banks — MB Bank, Techcombank, and TP Bank
-
-# \- B.Sc. Investment Economics, National Economics University, Hanoi (2009)
-
-# 
-
-# \---
-
-# 
-
-# \*Last updated: May 2026\*
-
+Leadership Development · Banking Strategy · Organizational Behavior · Financial Markets · Team Coaching
