@@ -1,19 +1,11 @@
-# Financial Models
+# Model Templates
 
-This directory contains all financial modeling work completed throughout the course.
+This folder contains blank model frameworks and reusable structures for financial analysis.
 
-## Structure
+## Contents
 
-- `templates/` — Blank model frameworks and reusable structures
-- `builds/` — Completed and fully populated financial models
+- `performance-ratios-template.xlsx` — Template for calculating and presenting key financial ratios (Stage 1)
 
-## Modeling Standards
+## Purpose
 
-Financial models should follow these principles:
-
-- Clear assumptions
-- Transparent calculations
-- Consistent formatting
-- Error checking
-- Auditability
-- Executive-level presentation quality
+Templates provide a consistent starting structure so that each completed model in `builds/` follows the same layout, formatting, and assumption conventions.
