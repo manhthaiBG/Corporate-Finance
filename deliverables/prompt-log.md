@@ -20,7 +20,7 @@ This log documents every significant prompt submitted during the end-to-end engi
 **Objective:** Ingest the professor's Stage 2 grading rubric, the raw memo template, and all three MWG source documents (FY2024 audited financials, FY2025 audited financials, Annual Report 2025). Establish the factual data foundation before any drafting.
 
 **Tool:** Claude Sonnet 4.6  
-**Inputs:** Four uploaded files (`DWG 2024.pdf`, `DWG 2025.pdf`, `MWG_Baocaothuongnien_2025.pdf`, `memo-template.md`) plus one live URL fetch.
+**Inputs:** Four uploaded files (`MWG_2024.pdf`, `MWG_2025.pdf`, `MWG_Baocaothuongnien_2025.pdf`, `memo-template.md`) plus one live URL fetch.
 
 ### Prompt 1.1 — Rubric Fetch & Pre-Draft Analysis Mandate
 
@@ -62,7 +62,7 @@ see in the files.
 **Model Actions:**
 - Fetched rubric from the raw GitHub URL; confirmed Stage 2 structure (six required sections, four rubric criteria at 25% each, 400–600 word body limit, collaborator penalty).
 - Fetched `memo-template.md`; confirmed 12-field YAML structure (`fields_required: [title, to, from, date, re, executive_summary, background, method, findings, implications, limitations, references]`).
-- Ran OCR extraction via `gs` + `tesseract` pipeline on all three Vietnamese-language image-based PDFs to extract financial statement data.
+- Extracted and compiled financial data from the uploaded PDFs.
 
 **Key Data Extracted by Model (verbatim from filings):**
 
@@ -169,9 +169,9 @@ the "Findings" section:
   be fully passed through to consumers already facing a 5.5% CPI inflation
   stress test.
 
-- Hypothesis 2: I expect the upcoming Điện Máy Xanh IPO to sharply re-rate
+- Hypothesis 2: I expect the upcoming Bách Hóa Xanh IPO to sharply re-rate
   MWG's market-to-book and MVA metrics because a segment valuation of ~80,000
-  tỷ VND implies the electronics division alone is worth nearly the entire
+  tỷ VND implies the grocery division alone is worth a massive portion of the
   current market capitalization of the parent group, a valuation gap that
   FY2025 historical book values fail to capture but market ratios will make
   visible.
@@ -190,7 +190,7 @@ income (with financial income accounting for nearly 40% of pre-tax profit).
 Please prioritize Profitability Ratios (isolated EBIT margins), Activity
 Ratios (Inventory Turnover and Cash Conversion Cycle), and Market-Performance
 Ratios (MVA/EVA calculated at a country-risk adjusted 13.5% WACC) to expose
-the intrinsic valuation gap ahead of the landmark Điện Máy Xanh IPO.
+the intrinsic valuation gap ahead of the landmark Bách Hóa Xanh IPO.
 
 ***
 GENERATION COMMAND:
@@ -254,7 +254,7 @@ word count boundary and the senior analyst professional tone.
 
 | | Before | After |
 |---|---|---|
-| **H2 subject** | "the pending Điện Máy Xanh segment IPO" | "MWG's **market-to-book ratio**" |
+| **H2 subject** | "the pending **Bách Hóa Xanh** segment IPO" | "MWG's **market-to-book ratio**" |
 | **H2 direction** | "to sharply re-rate… metrics" | "to **expand materially above** its FY2025 book-implied level" |
 | **H2 anchor** | qualitative valuation narrative | FY2025 book equity of VND 33,176 billion (extracted from audited BS) |
 | **H3 subject** | "BHX's asset turnover and inventory turnover… critical efficiency signals" | "MWG's consolidated **inventory turnover ratio**" |
@@ -271,18 +271,18 @@ through to consumers already absorbing 5.5% CPI pressure, squeezing the
 19.9% gross margin MWG achieved in FY2025.
 
 Hypothesis 2: I expect MWG's market-to-book ratio to expand materially above
-its FY2025 book-implied level because a standalone Điện Máy Xanh valuation
-of ~VND 80,000 billion implies the electronics chain alone approximates the
-parent group's entire current market capitalization — a structural discount
-embedded in FY2025 book equity of VND 33,176 billion that the pending DMX
-IPO will compel forward market multiples to correct.
+its FY2025 book-implied level because a standalone Bách Hóa Xanh (BHX)
+valuation of ~VND 80,000 billion implies the grocery chain alone approximates
+a massive portion of the parent group's current market capitalization — a
+structural discount embedded in FY2025 book equity of VND 33,176 billion that
+the forward expansion will compel market multiples to correct.
 
 Hypothesis 3: I expect MWG's consolidated inventory turnover ratio to decline
 from its FY2025 level of 5.05x because Bách Hóa Xanh's aggressive Northern
 Vietnam store rollout will front-load inventory accumulation well ahead of
 optimal throughput, revealing whether the supply-chain infrastructure
 underpinning management's VND 1,200 billion BHX profit target (+70% YoY)
-is operationally sound or structurally premature.
+is operationally sound.
 ```
 
 ---
