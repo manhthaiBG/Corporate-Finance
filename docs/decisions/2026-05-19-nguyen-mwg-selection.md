@@ -40,7 +40,7 @@ Three falsifiable, directional hypotheses frame this analysis:
 
 **Hypothesis 1:** I expect gross margin to compress in FY2026 versus FY2025 because the ~8% VND depreciation (USD/VND ~26,500) directly inflates import costs on smartphones and consumer electronics that cannot be fully passed through to consumers already absorbing 5.5% CPI pressure, squeezing the 19.9% gross margin MWG achieved in FY2025.
 
-**Hypothesis 2:** I expect MWG's market-to-book ratio to expand materially above its FY2025 book-implied level because a standalone Điện Máy Xanh valuation of ~VND 80,000 billion implies the electronics chain alone approximates the parent group's entire current market capitalization — a structural discount embedded in FY2025 book equity of VND 33,176 billion that the pending DMX IPO will compel forward market multiples to correct.
+**Hypothesis 2:** I expect MWG's market-to-book ratio to expand materially above its FY2025 book-implied level because a standalone Bách Hóa Xanh (BHX) valuation of ~VND 80,000 billion implies the grocery chain alone approximates a massive portion of the parent group's current market capitalization — a structural discount embedded in FY2025 book equity of VND 33,176 billion that the forward expansion will compel market multiples to correct.
 
 **Hypothesis 3:** I expect MWG's consolidated inventory turnover ratio to decline from its FY2025 level of 5.05x because Bách Hóa Xanh's aggressive Northern Vietnam store rollout will front-load inventory accumulation well ahead of optimal throughput, revealing whether the supply-chain infrastructure underpinning management's VND 1,200 billion BHX profit target (+70% YoY) is operationally sound or structurally premature.
 
@@ -48,7 +48,7 @@ Three falsifiable, directional hypotheses frame this analysis:
 
 ## Implications
 
-The ratio framework concentrates on three categories: (1) **Profitability** — isolated EBIT margins to strip out VND 3,107 billion in treasury and financial income (~36% of FY2025 pre-tax profit) and expose genuine retail operating leverage; (2) **Activity** — inventory turnover and cash conversion cycle to assess BHX supply-chain efficiency as the chain expands into lower-density Northern markets (789 new stores opened in FY2025 alone); (3) **Market performance** — MVA and EVA computed at a country-risk-adjusted WACC of 13.5% to quantify the valuation gap ahead of the DMX IPO and benchmark capital returns against MWG's 21.3% FY2025 ROE.
+The ratio framework concentrates on three categories: (1) **Profitability** — isolated EBIT margins to strip out VND 3,107 billion in treasury and financial income (~36% of FY2025 pre-tax profit) and expose genuine retail operating leverage; (2) **Activity** — inventory turnover and cash conversion cycle to assess BHX supply-chain efficiency as the chain expands into lower-density Northern markets (789 new stores opened in FY2025 alone); (3) **Market performance** — MVA and EVA computed at a country-risk-adjusted WACC of 13.5% to quantify the valuation gap ahead of the BHX IPO and benchmark capital returns against MWG's 21.3% FY2025 ROE.
 
 ---
 
