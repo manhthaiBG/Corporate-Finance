@@ -40,9 +40,9 @@ Three falsifiable, directional hypotheses frame this analysis:
 
 **Hypothesis 1:** I expect gross margin to compress in FY2026 versus FY2025 because the ~8% VND depreciation (USD/VND ~26,500) directly inflates import costs on smartphones and consumer electronics that cannot be fully passed through to consumers already absorbing 5.5% CPI pressure, squeezing the 19.9% gross margin MWG achieved in FY2025.
 
-**Hypothesis 2:** I expect the pending Điện Máy Xanh segment IPO to sharply re-rate MWG's market-to-book and MVA metrics because a standalone DMX valuation of ~VND 80,000 billion implies the electronics chain alone approximates the parent group's entire current market capitalization — a structural valuation discount that historical book values obscure but forward market multiples will surface.
+**Hypothesis 2:** I expect MWG's market-to-book ratio to expand materially above its FY2025 book-implied level because a standalone Điện Máy Xanh valuation of ~VND 80,000 billion implies the electronics chain alone approximates the parent group's entire current market capitalization — a structural discount embedded in FY2025 book equity of VND 33,176 billion that the pending DMX IPO will compel forward market multiples to correct.
 
-**Hypothesis 3:** I expect Bách Hóa Xanh's asset turnover and inventory turnover to be the critical FY2026 efficiency signals because validating management's VND 1,200 billion BHX net profit target (+70% YoY) requires structural supply-chain improvements across a newly capital-intensive Northern Vietnam logistics network, not temporary cost reduction.
+**Hypothesis 3:** I expect MWG's consolidated inventory turnover ratio to decline from its FY2025 level of 5.05x because Bách Hóa Xanh's aggressive Northern Vietnam store rollout will front-load inventory accumulation well ahead of optimal throughput, revealing whether the supply-chain infrastructure underpinning management's VND 1,200 billion BHX profit target (+70% YoY) is operationally sound or structurally premature.
 
 ---
 
