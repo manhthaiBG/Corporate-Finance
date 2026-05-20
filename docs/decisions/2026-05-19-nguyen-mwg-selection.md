@@ -18,43 +18,43 @@ courses: [BUS-629]
 
 ## Executive Summary
 
-Mobile World Investment Corporation (MWG, HOSE) is selected as the subject company for this ratio analysis project. Vietnam's largest consumer retailer — operating Thế Giới Di Động (smartphones), Điện Máy Xanh (home appliances), and Bách Hóa Xanh (grocery) — MWG reported FY2025 net revenue of VND 155,928 billion and net profit of VND 7,073 billion (+89% YoY). From a commercial credit and capital structure lens, MWG is the ideal stress-test candidate: it carries VND 29,931 billion in current-only borrowings with zero long-term debt while management targets 19% topline growth in FY2026 against compounding macro headwinds. The analysis will interrogate whether MWG's recovery is structurally anchored in retail operations or inflated by treasury carry income — a distinction critical to any credit underwriting decision.
+Mobile World Investment Corporation (MWG, HOSE) is selected for this ratio analysis project. Vietnam's largest consumer retailer — Thế Giới Di Động, Điện Máy Xanh, and Bách Hóa Xanh — reported FY2025 net revenue of VND 155,928 billion and net profit of VND 7,073 billion (+89% YoY). MWG is the ideal stress-test candidate: VND 29,931 billion in current-only debt with zero long-term borrowings, while management targets 19% topline growth against compounding macro headwinds. The central analytical question is whether the recovery is anchored in retail operations or inflated by treasury carry income.
 
 ---
 
 ## Background
 
-MWG (HOSE; consumer retail; VND reporting; fiscal year ending December 31; market cap ~VND 72,000 billion, May 2026) operates under Vietnamese Accounting Standards (VAS). Between FY2022–2023, the company executed aggressive restructuring — closing 200+ stores, exiting Cambodian operations (Bluetronics), and rationalizing Bách Hóa Xanh from 2,000+ to ~700 locations — compressing FY2023 net margin to 0.14% on VND 118,280 billion in revenue. The FY2024–2025 recovery has been sharp (ROE: 13.3% → 21.3%; net profit: VND 168 billion → VND 7,073 billion over two years), but FY2026 targets of VND 185,000 billion revenue and VND 9,200 billion net profit demand continued momentum into structurally untested territory against an ~8% VND depreciation, rising freight costs from Strait of Hormuz disruptions, and widening lending spreads.
+MWG (HOSE; consumer retail; VND reporting; FY ending December 31; market cap ~VND 72,000 billion, May 2026) operates under VAS. FY2022–2023 restructuring — closing 200+ stores, exiting Bluetronics, rationalizing Bách Hóa Xanh from 2,000+ to ~700 locations — compressed FY2023 net margin to 0.14%. Recovery has been sharp: ROE 13.3% → 21.3%, net profit VND 168 billion → VND 7,073 billion over two years. FY2026 targets (VND 185,000 billion revenue; VND 9,200 billion net profit) face ~8% VND depreciation, rising Strait of Hormuz freight costs, and widening lending spreads.
 
 ---
 
 ## Method
 
-Primary sources: MWG FY2024 and FY2025 EY-audited consolidated financial statements (HOSE disclosure portal, hsx.vn); MWG Annual Report 2025 (mwg.vn, accessed May 2026). Market data drawn from the HOSE portal and Bloomberg equivalents. Macro inputs — USD/VND reference rates, freight indices, and CPI — sourced from the State Bank of Vietnam (sbv.gov.vn). VAS-to-IFRS comparability gaps, particularly lease liability treatment (VAS omits IFRS 16-equivalent capitalization), will be flagged where material to leverage and coverage ratio interpretation.
+Primary sources: MWG FY2024–2025 EY-audited consolidated financials (hsx.vn); MWG Annual Report 2025 (mwg.vn); SBV macro data (sbv.gov.vn). VAS-to-IFRS gaps — particularly lease liability treatment — will be flagged where material to leverage interpretation.
 
 ---
 
 ## Findings
 
-Three falsifiable, directional hypotheses frame this analysis:
+Three falsifiable hypotheses frame this analysis:
 
-**Hypothesis 1:** I expect gross margin to compress in FY2026 versus FY2025 because the ~8% VND depreciation (USD/VND ~26,500) directly inflates import costs on smartphones and consumer electronics that cannot be fully passed through to consumers already absorbing 5.5% CPI pressure, squeezing the 19.9% gross margin MWG achieved in FY2025.
+**H1 — Gross margin compression:** ~8% VND depreciation (USD/VND ~26,500) inflates smartphone import costs that cannot be fully passed through under 5.5% CPI pressure, squeezing FY2025's 19.9% gross margin.
 
-**Hypothesis 2:** I expect MWG's market-to-book ratio to expand materially above its FY2025 book-implied level because a standalone Bách Hóa Xanh (BHX) valuation of ~VND 80,000 billion implies the grocery chain alone approximates a massive portion of the parent group's current market capitalization — a structural discount embedded in FY2025 book equity of VND 33,176 billion that the forward expansion will compel market multiples to correct.
+**H2 — Market-to-book re-rating:** Standalone BHX valuation of ~VND 80,000 billion approximates much of current group market cap — a structural discount embedded in FY2025 book equity of VND 33,176 billion that BHX's expansion will compel multiples to correct.
 
-**Hypothesis 3:** I expect MWG's consolidated inventory turnover ratio to decline from its FY2025 level of 5.05x because Bách Hóa Xanh's aggressive Northern Vietnam store rollout will front-load inventory accumulation well ahead of optimal throughput, revealing whether the supply-chain infrastructure underpinning management's VND 1,200 billion BHX profit target (+70% YoY) is operationally sound or structurally premature.
+**H3 — Inventory turnover decline:** BHX's Northern Vietnam rollout will front-load inventory ahead of optimal throughput, testing whether supply-chain infrastructure can support the VND 1,200 billion BHX profit target (+70% YoY) from FY2025's 5.05x base.
 
 ---
 
 ## Implications
 
-The ratio framework concentrates on three categories: (1) **Profitability** — isolated EBIT margins to strip out VND 3,107 billion in treasury and financial income (~36% of FY2025 pre-tax profit) and expose genuine retail operating leverage; (2) **Activity** — inventory turnover and cash conversion cycle to assess BHX supply-chain efficiency as the chain expands into lower-density Northern markets (789 new stores opened in FY2025 alone); (3) **Market performance** — MVA and EVA computed at a country-risk-adjusted WACC of 13.5% to quantify the valuation gap ahead of the BHX IPO and benchmark capital returns against MWG's 21.3% FY2025 ROE.
+Three ratio families drive the analysis: **Profitability** — strip out VND 3,107 billion in treasury income (~36% of FY2025 pre-tax profit) to isolate retail EBIT margin; **Activity** — inventory turnover and CCC to audit BHX supply-chain efficiency; **Market** — MVA and EVA at WACC 13.5% to quantify the valuation gap ahead of the BHX IPO.
 
 ---
 
-## Limitations & Next Steps
+## Limitations
 
-VAS reporting limits direct peer comparability on lease liabilities and deferred tax relative to IFRS-reporting regional retailers. BHX segment-level P&L is only partially disclosed in the annual report; unit economics must be inferred from management commentary. Next step: populate the Stage 1 ratio template with FY2023–2025 audited actuals and run a three-scenario sensitivity on Hypothesis 1 across 5%, 8%, and 12% VND depreciation assumptions.
+VAS reporting limits peer comparability on lease liabilities and deferred tax versus IFRS-reporting regional retailers. BHX segment P&L is only partially disclosed; unit economics must be inferred from management commentary.
 
 ---
 
