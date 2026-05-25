@@ -5,7 +5,7 @@ audience: Adam Stauffer (BUS-629 instructor); EMBA peers
 title: "Mobile World Investment Corporation (MWG) — FY2025 Performance Ratios Technical Specification"
 author: Nguyen Manh Thai
 date: 2026-05-25
-version: "1.1"
+version: "1.2"
 company: "Mobile World Investment Corporation (MWG, HOSE)"
 fields_required:
   - title
@@ -26,18 +26,19 @@ naming_convention: YYYY-MM-DD-{slug}.md
 courses:
   - BUS-629
 notes: >
-  Spec version 1.1 corrects a unit-mismatch gap identified during HIL review
-  (see Section 6 Validation Rules and HIL note at end of document).
-  Share price is denominated in raw VND (not VND billions), so the template
-  formula share_price × shares_outstanding yields VND millions, not VND
-  billions. MVA and Market-to-Book are corrected accordingly.
+  Spec version 1.2 adds three analytical upgrades identified during HIL Iteration 2
+  (see HIL Review Note at end of document):
+  (1) Segment-specific domestic competitor benchmarks replacing generic HOSE sector medians;
+  (2) Mandatory ALM interest rate gap stress-test in Du Pont section;
+  (3) Board-level strategic constraint on all four recommendations.
+  Version 1.1 corrected the share_price unit mismatch (÷1,000 factor for market cap).
 ---
 
 # MWG FY2025 Performance Ratios — Technical Specification
 
 **Author:** Nguyen Manh Thai
 **Date:** 2026-05-25
-**Version:** 1.1 (HIL-revised — see unit-mismatch correction note)
+**Version:** 1.2 (HIL Iteration 2 — macro, ALM, and peer benchmarking calibration)
 **Company:** Mobile World Investment Corporation · Ticker: MWG · Exchange: Ho Chi Minh Stock Exchange (HOSE)
 
 ---
@@ -52,7 +53,7 @@ This specification fully defines the Excel ratio model and the analytical work f
 - **Reporting Standard:** Vietnamese Accounting Standards (VAS). Critical VAS–IFRS difference: VAS does not require operating lease capitalisation (no IFRS 16 equivalent). Consequently, long-term debt = 0 and no right-of-use assets are recorded. The LT debt ratio and LT debt-to-equity ratio are structurally zero and should be interpreted as N/A rather than as low-leverage signals.
 - **Reporting Currency:** VND billions (1 VND billion = 10⁹ VND). All balance sheet, income statement, and cash flow figures are in VND billions unless otherwise noted.
 - **Share Price Unit Exception:** The share price input (`share_price`) is in raw VND per share (not VND billions). See Section 4 Derived Inputs for the unit-corrected market capitalisation formula.
-- **Analytical Objective:** Compute 25+ performance ratios across six categories (Performance, Profitability, Efficiency, Leverage, Liquidity, Du Pont), interpret the results against sector benchmarks, and deliver 3–5 actionable strategic recommendations.
+- **Analytical Objective:** Compute 25+ performance ratios across six categories (Performance, Profitability, Efficiency, Leverage, Liquidity, Du Pont), interpret the results against segment-specific domestic benchmarks and Q1/2026 macroeconomic conditions, and deliver 4 Board-level strategic recommendations.
 - **Intended Audience:** BUS-629 instructor (Adam Stauffer), Shidler College of Business / UH Mānoa EMBA cohort, and any LLM executor running Stage 5 analysis using this spec as sole input.
 
 ---
@@ -78,10 +79,23 @@ This specification fully defines the Excel ratio model and the analytical work f
 - Light gray (#F2F2F2) fill: formula-driven cells (no direct input)
 - White: descriptive labels
 
+**Named Range Prefix Conventions:**
+
+| Prefix | Scope | Example |
+|---|---|---|
+| `BAL_[item]_curr` / `_prior` | Balance sheet line items, current vs. prior year | `BAL_assets_total_curr` |
+| `INC_[item]` | Income statement items | `INC_sales`, `INC_ebit`, `INC_net` |
+| `CASH_[item]` | Cash flow items | `CASH_operating`, `CASH_investments` |
+| `startYear_[item]` | Alias for prior-year balance | `startYear_equity` ≡ `BAL_equity_shareholders_prior` |
+| `currentYear_[item]` | Current-year balance or derived figure | `currentYear_assets_total` |
+| `avg_[item]` | Average of start and current year | `avg_total_assets` |
+| `RATIO_[name]` | Key ratios reused in Du Pont | `RATIO_asset_turnover`, `RATIO_leverage` |
+| `share_price`, `shares_outstanding`, `cost_capital`, `tax_rate` | Analyst assumptions (no prefix) | Ratios!C8:C11 |
+
 **Data flow:** Balance Sheet, Income Statement, and Cash Flow Statement tabs feed Ratios tab exclusively via named ranges. No values are hard-coded in ratio formulas. Cover tab spot-check table is manually populated for source documentation; it does not feed ratio calculations.
 
 **Input / calculation / output separation:**
-- *Inputs:* Financial statement tabs (data entered via openpyxl script from audited filings) + four Ratios tab assumption cells (C8:C11)
+- *Inputs:* Financial statement tabs + four Ratios tab assumption cells (C8:C11)
 - *Calculations:* Ratios tab rows 12–38 (derived inputs) and rows 43–76 (ratio formulas)
 - *Outputs:* Ratio values in Ratios!C43:C76; Cover tab spot-check table
 
@@ -95,35 +109,35 @@ All values are sourced from MWG Audited Consolidated Financial Statements FY2025
 
 | Named Range | Description | FY2025 (curr) | FY2024 (prior) | Unit |
 |---|---|---:|---:|---|
-| `BAL_cash_marketable_securities_curr` | Cash & short-term financial investments | 38,874 | 34,221 | VND B |
+| `BAL_cash_marketable_securities_curr` / `_prior` | Cash & short-term financial investments | 38,874 | 34,221 | VND B |
 | `BAL_receivables_curr` / `_prior` | Trade and other receivables | 10,183 | 8,826 | VND B |
 | `BAL_inventories_curr` / `_prior` | Inventories | 27,267 | 22,245 | VND B |
-| `BAL_other_current_curr` / `_prior` | Other current assets | 878 | 544 | VND B |
+| `BAL_other_current_assets_curr` / `_prior` | Other current assets | 878 | 544 | VND B |
 | `BAL_assets_current_curr` / `_prior` | Total current assets (sum) | 77,202 | 65,836 | VND B |
 | `BAL_ppe_gross_curr` / `_prior` | PP&E gross | 19,568 | 19,265 | VND B |
-| `BAL_accum_depreciation_curr` / `_prior` | Accumulated depreciation | 16,970 | 15,678 | VND B |
-| `BAL_net_ppe_curr` / `_prior` | Net tangible fixed assets | 2,598 | 3,587 | VND B |
+| `BAL_accumulated_depreciation_curr` / `_prior` | Accumulated depreciation | 16,970 | 15,678 | VND B |
+| `BAL_fixed_assets_net_curr` / `_prior` | Net tangible fixed assets | 2,598 | 3,587 | VND B |
 | `BAL_intangibles_curr` / `_prior` | Intangible assets / goodwill | 0 | 0 | VND B |
 | `BAL_other_assets_curr` / `_prior` | Other long-term assets | 4,146 | 1,014 | VND B |
 | `BAL_assets_total_curr` / `_prior` | **Total Assets** | **83,946** | **70,437** | VND B |
 | `BAL_debt_short_term_curr` / `_prior` | Short-term bank borrowings | 29,931 | 27,300 | VND B |
-| `BAL_payables_curr` / `_prior` | Accounts payable | 13,114 | 9,180 | VND B |
+| `BAL_accounts_payable_curr` / `_prior` | Accounts payable | 13,114 | 9,180 | VND B |
 | `BAL_other_current_liabilities_curr` / `_prior` | Other current liabilities | 7,725 | 5,836 | VND B |
 | `BAL_liabilities_current_curr` / `_prior` | Total current liabilities (sum) | 50,770 | 42,316 | VND B |
 | `BAL_debt_long_term_curr` / `_prior` | Long-term debt | 0 | 0 | VND B |
-| `BAL_other_lt_liabilities_curr` / `_prior` | Other long-term liabilities | 0 | 0 | VND B |
+| `BAL_other_long_term_liabilities_curr` / `_prior` | Other long-term liabilities | 0 | 0 | VND B |
 | `BAL_common_stock_curr` / `_prior` | Common stock (paid-in capital) | 14,532 | 15,174 | VND B |
-| `BAL_retained_earnings_curr` / `_prior` | Retained earnings | 18,644 | 12,947 | VND B |
+| `BAL_retained_earnings_curr` / `_prior` | Retained earnings (incl. NCI) | 18,644 | 12,947 | VND B |
 | `BAL_equity_shareholders_curr` / `_prior` | **Total shareholders' equity** | **33,176** | **28,121** | VND B |
 | `BAL_liabilities_total_curr` / `_prior` | Total liabilities | 50,770 | 42,316 | VND B |
 
-> **Model note:** Model total assets (83,946 / 70,437) differs slightly from audited financial statement totals (84,066 / 70,416) because the simplified 8-row template does not capture all MWG sub-line items. The balance sheet equation holds within the model: Assets = Liabilities + Equity (83,946 = 50,770 + 33,176 ✓).
+> **Model note:** Model total assets (83,946 / 70,437) differs slightly from audited consolidated totals (84,066 / 70,416) because the simplified template does not capture all sub-line items. The balance sheet equation holds within the model: Assets = Liabilities + Equity (83,946 = 50,770 + 33,176 ✓).
 
 #### Income Statement Inputs
 
 | Named Range | Description | FY2025 | Unit |
 |---|---|---:|---|
-| `INC_sales` | Net revenue (net sales) | 155,928 | VND B |
+| `INC_sales` | Net revenue | 155,928 | VND B |
 | `INC_cost_goods_sold` | Cost of goods sold | 124,926 | VND B |
 | `INC_sga` | SG&A expenses (excl. D&A) | 22,036 | VND B |
 | `INC_depreciation` | Depreciation & amortisation | 1,891 | VND B |
@@ -141,11 +155,10 @@ All values are sourced from MWG Audited Consolidated Financial Statements FY2025
 | Named Range | Description | FY2025 | Unit |
 |---|---|---:|---|
 | `CASH_operating` | Cash provided by operations (CFO) | 6,096 | VND B |
-| `CASH_investing` | Cash used for investments (CFI) | −6,661 | VND B |
+| `CASH_investments` | Cash used for investments (CFI) | −6,661 | VND B |
 | `CASH_financing` | Cash from financing activities (CFF) | 668 | VND B |
-| `CASH_capex` | Capital expenditures | −888 | VND B |
 
-> **CF reconciliation check:** CFO + CFI + CFF = 6,096 − 6,661 + 668 = +103B ≈ change in cash & deposits ✓
+> **CF reconciliation:** CFO + CFI + CFF = 6,096 − 6,661 + 668 = +103B ✓
 
 #### Market & Assumption Inputs (Ratios tab, cells C8:C11)
 
@@ -154,13 +167,13 @@ All values are sourced from MWG Audited Consolidated Financial Statements FY2025
 | `share_price` | Closing price Dec 31, 2025 (CafeF.vn verified) | 88,400 | VND per share |
 | `shares_outstanding` | Shares outstanding | 1,469.7 | Millions of shares |
 | `cost_capital` | WACC (country-risk-adjusted) | 13.5% | % |
-| `tax_rate` | Effective tax rate | 20.0% | % |
+| `tax_rate` | Statutory tax rate | 20.0% | % |
 
 ---
 
 ### 4. Derived Inputs
 
-All derived inputs are computed in Ratios tab rows 12–38. Formulas are expressed in named-range notation.
+All derived inputs are computed in Ratios tab rows 12–38.
 
 | Named Range | Formula | Value | Unit |
 |---|---|---:|---|
@@ -186,13 +199,11 @@ All derived inputs are computed in Ratios tab rows 12–38. Formulas are express
 | `avg_total_assets` | `(currentYear_assets_total + startYear_total_assets) / 2` | 77,191.5 | VND B |
 | `avg_total_capitalization` | `(currentYear_total_capitalization + startYear_total_capitalization) / 2` | 30,648.5 | VND B |
 
-> ¹ **Unit-mismatch correction (HIL revision):** The template formula `share_price × shares_outstanding = 88,400 × 1,469.7 = 129,921,480` yields VND millions (raw VND per share × millions of shares = millions of VND). Dividing by 1,000 converts to VND billions, consistent with all balance sheet figures. The corrected `market_capitalization = 129,921.5 VND billions`. The raw template cell C12 shows 129,921,480; the Stage 5 executor must apply the ÷ 1,000 correction when computing MVA and Market-to-Book. See also Validation Rule 6 in Section 6.
+> ¹ **Unit-mismatch correction (HIL v1.1):** Raw template formula `share_price × shares_outstanding = 88,400 × 1,469.7 = 129,921,480` yields VND millions. Dividing by 1,000 converts to VND billions. The Stage 5 executor must use 129,921.5 VND B for all MVA and Market-to-Book calculations. See Validation Rule 6.
 
 ---
 
 ### 5. Ratio Definitions & Formulas
-
-All ratios use named-range notation. Expected output values are derived from Stage 3 workbook (Ratios tab C43:C76) with unit corrections applied where noted.
 
 #### Performance
 
@@ -202,7 +213,7 @@ All ratios use named-range notation. Expected output values are derived from Sta
 | Market-to-Book | `market_capitalization / currentYear_equity` ¹ | 3.91 | × |
 | Economic Value Added (EVA) | `currentYear_after_tax_operating_income − (cost_capital × startYear_total_capitalization)` | 4,453.5 | VND B |
 
-> ¹ Use unit-corrected `market_capitalization = 129,921.5 VND billions` (not the raw template value of 129,921,480).
+> ¹ Use unit-corrected `market_capitalization = 129,921.5 VND B` (not raw template value 129,921,480).
 
 #### Profitability (start-of-year base)
 
@@ -244,7 +255,7 @@ All ratios use named-range notation. Expected output values are derived from Sta
 | Debt Burden | `INC_net / currentYear_after_tax_operating_income` | 0.857 | × |
 | Financial Leverage | `currentYear_assets_total / currentYear_equity` | 2.53 | × |
 
-> **VAS Note:** LT Debt Ratio = 0% and LT Debt-to-Equity = 0% are structural under VAS (no IFRS 16 lease capitalisation). Do not interpret as conservative financing. MWG carries 29,931B in short-term bank borrowings. The correct leverage signal is Total Debt Ratio (60.5%) and TIE (4.81×).
+> **VAS Note:** LT Debt Ratio = 0% is a structural VAS artefact (no IFRS 16). Do not interpret as low leverage. Primary leverage signals: Total Debt Ratio (60.5%) and TIE (4.81×).
 
 #### Liquidity
 
@@ -275,7 +286,7 @@ The Stage 5 executor must verify all six rules before proceeding to analysis. Fl
 | 3 | **ATOI derivation** | `currentYear_after_tax_operating_income = INC_net + INC_interest_expense × (1 − tax_rate)` → 8,249.8 = 7,073 + 1,471 × 0.80 ✓ | ≤ 0.1B |
 | 4 | **Du Pont ROA** | `RATIO_operating_profit_margin × RATIO_asset_turnover ≈ RATIO_roa` → 5.29% × 2.21 = 11.69% ≈ 11.71% ✓ | ≤ 0.5% |
 | 5 | **Du Pont ROE** | `RATIO_leverage × RATIO_asset_turnover × RATIO_operating_profit_margin × RATIO_debt_burden ≈ RATIO_roe` → 2.53 × 2.21 × 5.29% × 0.857 = 25.34% ≈ 25.15% ✓ | ≤ 0.5% |
-| 6 | **Market cap unit correction** | `market_capitalization (VND B) = share_price × shares_outstanding / 1,000 = 88,400 × 1,469.7 / 1,000 = 129,921.5B`. Raw template cell C12 = 129,921,480 (VND millions). MVA and M/B must use the ÷1,000 corrected value. Raw template outputs MVA ≈ 129.9M (wrong) and M/B ≈ 3,916× (wrong). | Unit match required |
+| 6 | **Market cap unit correction** | `market_capitalization (VND B) = share_price × shares_outstanding / 1,000 = 88,400 × 1,469.7 / 1,000 = 129,921.5B`. Raw template cell C12 = 129,921,480 (VND millions — wrong). MVA and M/B must use the ÷1,000 corrected value. | Unit match required |
 
 ---
 
@@ -283,36 +294,41 @@ The Stage 5 executor must verify all six rules before proceeding to analysis. Fl
 
 ### 7. Analysis Requirements
 
-For each ratio category below, interpret the computed values, apply the listed benchmarks, and note cross-category connections.
+For each ratio category below, interpret the computed values against the specified benchmarks and note cross-category connections. **Do not use generic HOSE-wide sector medians — use the segment-specific domestic competitor benchmarks listed below.**
 
 **Performance (MVA, M/B, EVA)**
 - Interpret EVA = 4,453.5B VND as the spread between after-tax operating return and the 13.5% WACC hurdle applied to start-of-year capital.
-- Interpret M/B = 3.91× against the HOSE retail sector median (~1.5–2.5×). A ratio materially above 1× confirms market expectation of continued value creation. Note that the pending Bách Hóa Xanh (BHX) segment IPO may compress this premium if BHX is spun off at a valuation above its book contribution.
-- MVA = 96,745.5B represents the market's total value added above book equity. Assess sustainability relative to the EVA trajectory.
-- **Cross-category link:** EVA sustainability depends on operating profit margin (Efficiency) and the 13.5% WACC assumption. If BHX margin compresses (see Hypothesis 2), ATOI falls and EVA narrows.
+- Interpret M/B = 3.91× against HOSE retail peers. Note: a pending Bách Hóa Xanh (BHX) segment IPO at ~80,000B VND standalone valuation implies the grocery division alone may approximate a large portion of MWG's current market cap — a structural discount embedded in the FY2025 book equity of 33,176B that the market has only partially corrected.
+- MVA = 96,745.5B represents total market value added above book equity. Assess sustainability against EVA trajectory and the Q1/2026 macro headwinds quantified below.
+- **Cross-category link:** EVA sustainability depends on operating profit margin (Efficiency) and the 13.5% WACC assumption. ALM-driven interest cost increases (see Du Pont section) directly compress ATOI and narrow EVA.
 
 **Profitability (ROA, ROC, ROE)**
-- Benchmark ROE (25.15%) against HOSE consumer discretionary median (~12–18%). Decompose into the Du Pont drivers before attributing performance.
-- ROC = 29.34% reflects zero long-term debt under VAS; interpret against WACC of 13.5% — the spread (≈15.8 pp) is the core value-creation argument.
-- Flag that ATOI includes other income (financial income of 3,107B from deposit placement). Isolate the EBIT-based operating return from the treasury carry income contribution, which is not recurring core retail income.
-- **Cross-category link:** High ROE is partly driven by financial leverage (2.53×, Leverage section) and high asset turnover (2.21×, Efficiency). Du Pont section must decompose this.
+- Benchmark ROE (25.15%) against HOSE consumer discretionary median (~12–18%). Decompose into Du Pont drivers before attributing outperformance.
+- ROC = 29.34% reflects zero long-term debt under VAS; interpret against WACC 13.5% — the spread (~15.8 pp) is the core value-creation argument.
+- Flag that ATOI includes financial income (3,107B from deposit placement). Isolate EBIT-based retail return from treasury carry income, which is not recurring core retail income.
+- **Q1/2026 macro headwind:** March 2026 CPI rose 4.65% YoY (GSO); Q1/2026 average CPI +3.51%; core inflation 3.63% YoY. The executor must assess how sustained inflation erodes real consumer purchasing power for discretionary electronics, compressing top-line revenue growth and threatening MWG's FY2026 target of 185,000B in net revenue (+19% YoY).
+- **Cross-category link:** High ROE is partly driven by leverage (2.53×) and asset turnover (2.21×). Du Pont section must decompose this.
 
 **Efficiency (Turnover, Margins)**
-- Asset Turnover = 2.21× is high for a multi-format retailer; benchmark against HOSE retail peers (~1.5–2.0×). Assess whether Northern BHX rollout will dilute this as capital base expands ahead of revenues.
-- Inventory Turnover = 5.62× (65 days): benchmark against FY2024 model-computed level and management's own 5.05× (FY2025 Annual Report, p.25). Note the improvement reflects better stock discipline at TGDĐ/DMX but may reverse as BHX scales in lower-density Northern markets.
-- Collection Period = 20.7 days: typical for a retail group with B2B receivables from franchisees and corporate clients.
-- Net Profit Margin = 4.54% versus Gross Margin = (155,928 − 124,926) / 155,928 = 19.9%. The gap between gross and net margin (≈15.4 pp) is absorbed by SG&A (14.1%), D&A (1.2%), and net interest/tax (1.4%). Flag that financial income of 3,107B inflates the net margin relative to pure retail operating performance.
+
+*Segment-specific competitor benchmarks — mandatory:*
+- **Consumer Electronics & ICT (TGDĐ & DMX):** Benchmark Asset Turnover (2.21×) and Inventory Turnover (5.62× / 65 days) directly against **FPT Retail (FRT)** and **Nguyen Kim**. Generic HOSE retail medians are insufficient; FRT is the only listed domestic pure-play comparable for ICT retail. The executor must note where MWG leads or lags FRT on these two metrics.
+- **Pharmacy segment (An Khang):** Benchmark Inventory Days (65 days consolidated) and scaling efficiency against **Long Châu (FRT subsidiary)**. Long Châu has demonstrated superior per-store economics and inventory discipline in the pharmacy channel. The executor must assess whether An Khang's inventory model is structurally viable against Long Châu's benchmark or requires a strategic pivot.
+
+*Supply-side cost shock — mandatory integration:*
+- May 2026 fuel prices: RON 95-III at ~25,540 VND/litre; Diesel at ~28,760 VND/litre. Local logistics networks are imposing flexible fuel surcharges of 6–10%. Vietnam's logistics cost-to-GDP ratio of 15–16% is cited as macro context only — it explains why fuel surcharges transmit so forcefully into retail SG&A, but it is **not** an invitation to recommend national-level logistics policy. The executor must translate this macro headwind into MWG-specific actions: quantify the directional impact on SG&A expenses (currently 22,036B / 14.1% of revenue) and assess the erosion risk to the 5.29% Operating Profit Margin. Any recommendation arising from this analysis must be a Board-level decision MWG can execute unilaterally — for example, renegotiating third-party logistics contracts, accelerating in-house BHX distribution centre investment, or locking in fuel-price-indexed freight agreements.
+- Net Profit Margin = 4.54% vs. Gross Margin = 19.9%. The 15.4 pp gap is absorbed by SG&A (14.1%), D&A (1.2%), and net interest/tax (1.4%). Flag that financial income (3,107B) inflates net margin above pure retail operating performance.
 
 **Leverage**
-- LT Debt Ratio = 0% is a VAS structural artefact, not a low-risk signal. Assess leverage through Total Debt Ratio (60.5%) and TIE (4.81×).
-- TIE = 4.81× and Cash Coverage = 6.10× are acceptable but not strong for a company carrying 29,931B in short-term rollover debt. Stress-test: if interest rates rise 100 bps, TIE falls to approximately 4.0× (still above 3× threshold).
-- Debt Burden = 0.857× indicates that non-operating income (financial income, net of taxes) materially reduces the effective tax-and-interest drag on ATOI, allowing net income to be 85.7% of ATOI despite the absence of LT debt tax shield.
+- LT Debt Ratio = 0% is a VAS structural artefact. Assess leverage through Total Debt Ratio (60.5%) and TIE (4.81×).
+- TIE = 4.81× and Cash Coverage = 6.10× are acceptable but not strong given 29,931B in short-term rollover debt. Stress-test: if interest rates rise 100 bps, annual interest increases by ~299B, compressing TIE to approximately 4.39× (still above 3× threshold; see Du Pont Section 8 for full ALM derivation).
+- Debt Burden = 0.857× indicates that non-operating financial income partially reduces the effective drag on ATOI. The executor must flag that this treasury carry income is rate-sensitive (see Du Pont ALM analysis).
 
 **Liquidity**
-- Current Ratio = 1.52×: adequate. Benchmark minimum for retail: 1.2×. Monitor: if BHX inventory front-loading increases current assets without proportional revenue, ratio may widen artificially.
-- Quick Ratio = 0.97×: below 1.0×. This is typical for inventory-heavy retail groups; however, the 38,874B cash & ST investments position provides a strong de facto liquidity buffer.
-- Cash Ratio = 0.77×: MWG's "smart carry trade" strategy (borrowing short at low rates, placing 33,874B in higher-yield deposits) means that the cash ratio overstates available operational liquidity — a portion of these deposits serve as collateral for ST borrowings.
-- **Cross-category link:** High Cash Ratio + Low Quick Ratio reveals that inventory (27,267B) is the critical variable. Inventory Turnover (Efficiency) and its sustainability under BHX expansion is therefore the primary liquidity risk.
+- Current Ratio = 1.52×: adequate. Retail minimum: 1.2×. Monitor BHX inventory front-loading risk.
+- Quick Ratio = 0.97×: below 1.0×, typical for inventory-heavy retail. The 38,874B cash & ST investments position provides a strong de facto liquidity buffer — but see ALM caveat below.
+- Cash Ratio = 0.77×: MWG's treasury strategy (borrowing short at low rates, placing 33,874B in higher-yield fixed deposits) means the cash ratio overstates available operational liquidity. A portion of these deposits serve as collateral for ST borrowings. **In the Q1/2026 tightening credit cycle, if deposit maturities do not align with short-term debt rollover dates, MWG faces asset-liability maturity mismatch risk.** The executor must flag this as a structural liquidity vulnerability, not a liquidity strength.
+- **Cross-category link:** Inventory (27,267B) is the critical variable. Inventory Turnover (Efficiency) sustainability under BHX expansion is the primary liquidity risk.
 
 ---
 
@@ -325,55 +341,63 @@ For each ratio category below, interpret the computed values, apply the listed b
 **Decomposition instructions for Stage 5 executor:**
 
 1. Compute each of the four Du Pont components from the named ranges in Section 5.
-2. Identify the **primary ROE driver**: Asset Turnover (2.21×) is the dominant component for a retail group operating on thin margins. This is characteristic of high-volume, low-margin retail. Confirm or challenge this based on the computed values.
-3. Interpret the **Debt Burden (0.857×)**: This ratio is below 1.0× because non-operating income (financial income) supplements EBIT-level earnings, such that net income is lower than ATOI as a percentage. This is unusual — typically Debt Burden compresses ROE below the ATOI-based return. Here it partially offsets leverage, confirming that treasury income is structurally propping ROE.
-4. Assess **sustainability**: High Asset Turnover is achievable at current scale. If BHX expands its store count from ~1,700 to 2,000+ in FY2026, capital base grows faster than revenue in the near term, which will compress Asset Turnover. Quantify the sensitivity: a 10% asset increase with flat revenue reduces Asset Turnover from 2.21× to approximately 2.01×, reducing Du Pont ROE by approximately 2 percentage points.
-5. Verify Du Pont ROE ≈ direct ROE within 0.5% tolerance (Validation Rule 5).
+2. Identify the **primary ROE driver**: Asset Turnover (2.21×) is the dominant component for a retail group operating on thin margins. Confirm or challenge this based on computed values.
+3. Interpret the **Debt Burden (0.857×)**: Below 1.0× because non-operating financial income supplements EBIT-level earnings. Net income is lower than ATOI as a percentage — this is unusual and reflects structural reliance on treasury carry income to prop ROE.
+4. Assess **BHX expansion sensitivity**: If BHX expands from ~1,700 to 2,000+ stores in FY2026, capital base grows faster than revenue near-term, compressing Asset Turnover. Quantify: a 10% asset increase with flat revenue reduces Asset Turnover from 2.21× to ~2.01×, reducing Du Pont ROE by approximately 2 percentage points.
+5. **ALM Interest Rate Gap Stress-Test (mandatory):** Perform a dedicated Asset-Liability Management risk analysis on MWG's balance sheet structure. MWG carries 29,931B VND in short-term floating-rate bank borrowings to fund working capital, while simultaneously locking a large portion of its 38,874B VND cash position into fixed-term bank deposits. In the early 2026 credit tightening environment, short-term borrowing rates adjust upward immediately upon rollover, while locked deposit yields remain fixed until maturity. The executor must:
+   - Estimate the directional impact of a 100 bps rise in short-term borrowing rates on annual interest expense (currently 1,471B). A 100 bps increase on 29,931B ≈ +299B additional interest, reducing EBIT by ~299B and compressing TIE from 4.81× to approximately 4.39×.
+   - Assess how this interest cost increase reduces Net Margin (currently 4.54%) and cascades through the Debt Burden component of the Du Pont ROE decomposition.
+   - Evaluate whether the treasury carry spread (deposit yield minus borrowing rate) narrows to zero or turns negative, eliminating the 3,107B financial income that currently supports the Debt Burden ratio above 0.80×.
+   - Flag whether MWG's current ALM structure represents a strategic carry trade or an unhedged refinancing risk, given the Q1/2026 tightening cycle.
+6. Verify Du Pont ROE ≈ direct ROE within 0.5% tolerance (Validation Rule 5).
 
 ---
 
 ### 9. Strategic Recommendations
 
-Provide **exactly 4 recommendations**, each meeting all three standards below:
+Provide **exactly 4 recommendations**, each meeting all three standards below.
 
-**Evidence standard:** Each recommendation must cite at least one specific ratio value from Section 5 and one directional data point (year-over-year change, benchmark gap, or trend).
+> **Board-Level Constraint (mandatory):** All 4 recommendations must address Board-level capital allocation, strategic asset-liability management, or structural financing decisions. Two categories of scope are explicitly prohibited:
+> 1. *Micro-management* — SKU rationalisation, store-level staffing, point-of-sale optimisation, or any action delegated below the Group CFO level.
+> 2. *National policy* — recommendations that require government action, industry-wide regulation, or macro-level infrastructure investment (e.g., "optimise Vietnam's national logistics corridor", "lobby for fuel subsidy reform", "support green logistics policy"). Macro data (CPI, fuel prices, logistics cost-to-GDP) is analytical context only; it must be translated into a company-specific Board decision, not a policy prescription.
+>
+> Every recommendation must be actionable by MWG's Board of Directors or Group CFO alone, without requiring third-party regulatory or government approval. Examples of acceptable scope: interest rate hedging via swaps or fixed-rate caps, transitioning short-term floating debt into fixed-rate instruments, capital structure matching for BHX expansion financing, in-house distribution centre investment, segment equity separation strategies.
 
-**Actionable specificity:** Each recommendation must name a concrete management action (not "improve efficiency" — instead "reduce average days in inventory from 65 days to below 55 days by tightening BHX northern hub replenishment cycles").
+**Evidence standard:** Each recommendation must cite at least one specific ratio value from Section 5 and one directional data point (YoY change, benchmark gap, or macro trend).
+
+**Actionable specificity:** Each recommendation must name a concrete Board-level action (not "manage interest rate risk" — instead "initiate a structured interest rate swap programme to fix 50% of the 29,931B short-term borrowing at current rates before Q3/2026 rollover, capping TIE downside at 4.0× under a 150 bps shock scenario").
 
 **Format per recommendation:**
 ```
 ### R[n]: [Title]
 - **Ratio evidence:** [Ratio name] = [value], vs. benchmark/prior [value]
 - **Observation:** [One sentence on what the ratio reveals]
-- **Recommendation:** [Specific management action]
+- **Recommendation:** [Specific Board-level action]
 - **Risk if not acted upon:** [Directional consequence on a named ratio]
 ```
 
 **Required recommendation coverage (one per area):**
-1. Earnings quality / financial income dependency (Operating Profit Margin vs. Net Margin gap)
-2. BHX inventory efficiency ahead of Northern expansion (Inventory Turnover)
-3. Short-term debt rollover and interest coverage (TIE, Total Debt Ratio)
-4. Market valuation and BHX segment disclosure (MVA, M/B in context of pending BHX IPO)
+1. ALM hedging strategy — interest rate risk from ST floating debt vs. fixed deposit mismatch (TIE, Debt Burden)
+2. BHX expansion capital structure — equity vs. debt financing for Northern rollout (Asset Turnover, Total Debt Ratio)
+3. Earnings quality and treasury carry dependency — Board decision on financial income reliance (Operating Profit Margin vs. Net Margin gap)
+4. BHX segment disclosure and valuation gap — strategic decision on segment reporting ahead of IPO (MVA, M/B)
 
 ---
 
 ### 10. Output Format
 
-The Stage 5 analysis deliverable must conform exactly to the following structure:
-
 **File format:** Markdown (`.md`)
-**Length:** 1,400–1,800 words (body only; exclude frontmatter and reference section)
+**Length:** 1,400–1,800 words (body only; exclude frontmatter and references)
 **Tone:** Senior analyst memo — factual, direct, quantitatively grounded. No marketing language. No hedging without data support.
 **Audience:** Executive reader with financial literacy; does not need formula derivations explained.
 
 **Required sections in order:**
-
 ```
 ## Executive Summary          (~150 words)
 ## Ratio Results Summary      (table: all 25+ ratios with name, value, unit, one-line interpretation)
-## Du Pont Decomposition      (~200 words, includes the decomposition identity with computed values)
-## Category Analysis          (~600 words total across 6 sub-sections, one per ratio category)
-## Strategic Recommendations  (4 recommendations in the R[n] format specified in Section 9)
+## Du Pont Decomposition      (~200 words, includes decomposition identity with computed values + ALM stress-test)
+## Category Analysis          (~600 words across 6 sub-sections, one per ratio category)
+## Strategic Recommendations  (4 recommendations in R[n] format, Board-level scope only)
 ## Model Limitations          (~100 words: VAS vs IFRS, simplified template, unit mismatch correction)
 ## References                 (source list)
 ```
@@ -388,26 +412,48 @@ where Signal is one of: ✅ Positive · ⚠️ Monitor · ❌ Concern
 
 ## References
 
-1. Mobile World Investment Corporation — Audited Consolidated Financial Statements FY2025. Available at: https://ir.thegioididong.com
-2. Mobile World Investment Corporation — Audited Consolidated Financial Statements FY2024. Available at: https://ir.thegioididong.com
-3. Mobile World Investment Corporation — Annual Report 2025. Available at: https://ir.thegioididong.com
-4. CafeF.vn historical price feed — MWG closing price Dec 31, 2025 = 88,400 VND. Available at: https://cafef.vn/du-lieu/hose/mwg-cong-ty-co-phan-dau-tu-the-gioi-di-dong.chn
-5. Stage 3 populated workbook: `2026-05-21-nguyen-mwg-financials.xlsx` (Ratios tab C43:C76, verified values used in Sections 3–5)
-6. Stage 4 brief: https://github.com/adamwstauffer/shidler/blob/main/courses/BUS-629-VEMBA-International-Corporate-Finance/stage4-technical-specification.md
-7. Spec template: https://github.com/adamwstauffer/shidler/blob/main/docs/templates/spec-template.md
+1. Mobile World Investment Corporation — Audited Consolidated Financial Statements FY2025. https://ir.thegioididong.com
+2. Mobile World Investment Corporation — Audited Consolidated Financial Statements FY2024. https://ir.thegioididong.com
+3. Mobile World Investment Corporation — Annual Report 2025. https://ir.thegioididong.com
+4. CafeF.vn — MWG closing price Dec 31, 2025 = 88,400 VND. https://cafef.vn/du-lieu/hose/mwg
+5. General Statistics Office of Vietnam (GSO) — CPI March 2026: +4.65% YoY; Q1/2026 average: +3.51%; core inflation: +3.63% YoY.
+6. Vietnam Petroleum Administration — Fuel prices May 2026: RON 95-III 25,540 VND/l; Diesel 28,760 VND/l.
+7. Stage 3 populated workbook: `2026-05-21-nguyen-mwg-financials.xlsx` (Ratios tab C43:C76)
+8. Stage 4 brief: https://github.com/adamwstauffer/shidler/blob/main/courses/BUS-629-VEMBA-International-Corporate-Finance/stage4-technical-specification.md
+9. Spec template: https://github.com/adamwstauffer/shidler/blob/main/docs/templates/spec-template.md
 
 ---
 
-## HIL Review Note (Human-in-the-Loop Iteration — Version 1.0 → 1.1)
+## HIL Review Note
 
-**Gap identified in v1.0 draft:** In the first draft of this specification (v1.0), Section 3 Data Inputs listed `market_capitalization` as the raw template output of `share_price × shares_outstanding = 88,400 × 1,469.7 = 129,921,480` with unit labeled "VND B." Upon reviewing the Stage 3 workbook ratio outputs, the Market-to-Book ratio showed 3,916× and MVA showed approximately 129.9 million VND billions — both values were obviously wrong for a company with 33,176B in book equity.
+### Iteration 1: Version 1.0 → 1.1 (Formula & Unit Calibration)
 
-**Root cause analysis:** The template formula computes `share_price (raw VND per share) × shares_outstanding (millions of shares) = result in millions of VND`. Since the balance sheet is denominated in VND billions, the market cap is 1,000× too large in the formula output. This is a unit mismatch: the template was designed for USD-denominated companies where share price (USD/share) × shares (millions) = USD millions, matching balance sheet units. For MWG, share price (88,400 VND/share) × 1,469.7M shares = 129,921,480 (VND millions), not VND billions.
+**Gap identified in v1.0:** Section 3 listed `market_capitalization = 129,921,480 VND B`. Upon reviewing the Stage 3 workbook ratio outputs, Market-to-Book showed 3,916× and MVA showed ~129.9 million VND billions — both nonsensical for a company with 33,176B in book equity.
+
+**Root cause:** The template formula `share_price (raw VND/share) × shares_outstanding (millions)` yields VND millions, not VND billions. The template was designed for USD companies where share price (USD/share) × shares (millions) = USD millions = same unit as balance sheet. For MWG, 88,400 VND/share × 1,469.7M shares = 129,921,480 VND millions — 1,000× too large.
+
+**Without this correction, Stage 5 would have reported** MVA of ~129 million VND billions and M/B of ~3,916× — making the entire Performance section analytically unusable.
 
 **Changes made in v1.1:**
-1. Added footnote ¹ to Section 3 (Data Inputs) flagging the unit mismatch
-2. Revised Section 4 (Derived Inputs) to show corrected formula: `market_capitalization = share_price × shares_outstanding / 1,000 = 129,921.5 VND billions`
-3. Revised Section 5 Performance ratios: MVA = 96,745.5B (not ~129.9M); Market-to-Book = 3.91× (not 3,916×)
-4. Added Validation Rule 6 in Section 6 requiring Stage 5 executor to apply the ÷1,000 unit correction before computing MVA and Market-to-Book
+1. Added ÷1,000 factor to market cap formula → `market_capitalization = 129,921.5 VND B`
+2. Recalculated Performance ratio expected outputs: MVA = 96,745.5B; M/B = 3.91×
+3. Added Validation Rule 6 requiring Stage 5 executor to apply unit correction before computing MVA and M/B
+4. Added footnote ¹ throughout ratio tables flagging the correction
 
-**What this means for Stage 5:** Do not use the raw Ratios!C43 (MVA) or Ratios!C44 (M/B) values from the Excel file directly. Apply the correction per Validation Rule 6. EVA (Ratios!C45 = 4,453.5B) is not affected by the market cap unit mismatch and is correct as-is.
+---
+
+### Iteration 2: Version 1.1 → 1.2 (Macro, ALM & Peer Benchmarking Calibration)
+
+**Gaps identified in v1.1:** While mathematically accurate after Iteration 1, v1.1 suffered three analytical gaps that would have caused Stage 5 to produce generic, Western-benchmark-driven output irrelevant to MWG's actual competitive environment in Q1/2026:
+
+**Gap 1 — Flawed industry benchmarking:** v1.1 used generic HOSE retail sector medians (e.g., "~1.5–2.0×" for asset turnover) that aggregate electronics, grocery, pharmacy, and apparel retailers into a single peer group. MWG's three distinct segments (TGDĐ/DMX in ICT, An Khang in pharmacy, BHX in grocery) each face different competitive dynamics. Without segment-specific domestic competitors, Stage 5 benchmarking would have been unreliable.
+
+**Gap 2 — Missing ALM interest rate risk:** v1.1 noted MWG's 29,931B in short-term borrowings and 38,874B in cash/deposits, but did not instruct the executor to analyse the maturity mismatch. In the early 2026 credit tightening cycle, floating short-term borrowing rates reprice immediately on rollover while fixed-term deposits remain locked. Without this ALM stress-test, Stage 5 would have treated the treasury carry strategy as a pure positive without flagging its rate-sensitivity downside.
+
+**Gap 3 — Absent quantitative macro headwinds:** v1.1 referenced macro risks qualitatively but provided no data. The March 2026 GSO CPI figure (4.65% YoY), core inflation (3.63%), and May 2026 fuel price spikes (RON 95-III: 25,540 VND/l; Diesel: 28,760 VND/l with 6–10% logistics surcharges) were sourced by the analyst after v1.1 was generated and were not available to the LLM without manual input. Without these data points, Stage 5 macro analysis would have been qualitative assertions rather than quantified headwinds.
+
+**Changes made in v1.2:**
+1. **Section 7 (Efficiency):** Replaced generic benchmarks with mandatory FPT Retail (FRT) and Nguyen Kim comparisons for TGDĐ/DMX; mandatory Long Châu comparison for An Khang. Added GSO CPI data and logistics fuel surcharge figures as mandatory integration points. Added explicit guardrail: logistics cost-to-GDP (15–16%) is macro context only; the executor must translate this into MWG-specific Board actions (e.g., logistics contract renegotiation, in-house distribution centre investment), not national policy prescriptions.
+2. **Section 8 (Du Pont):** Added Step 5 — mandatory ALM interest rate gap stress-test with specific calculation instructions (100 bps shock → +299B interest → TIE 4.81× → ~4.39×; carry spread compression analysis).
+3. **Section 9 (Recommendations):** Added Board-level constraint with two explicit exclusion categories: (a) operational micro-management and (b) national/government-level policy recommendations. Macro headwinds (CPI, fuel prices, logistics cost) must be translated into company-specific actions actionable by MWG's Board or Group CFO without requiring third-party regulatory approval.
+4. **References:** Added GSO CPI source and Vietnam Petroleum Administration fuel price source.
