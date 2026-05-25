@@ -5,40 +5,23 @@ audience: Adam Stauffer (BUS-629 instructor); EMBA peers
 title: "Mobile World Investment Corporation (MWG) — FY2025 Performance Ratios Technical Specification"
 author: Nguyen Manh Thai
 date: 2026-05-25
-version: "1.2"
+version: "1.3"
 company: "Mobile World Investment Corporation (MWG, HOSE)"
-fields_required:
-  - title
-  - author
-  - date
-  - version
-  - company
-  - scope
-  - model_architecture
-  - data_inputs
-  - derived_inputs
-  - formulas
-  - validation
-  - analysis_requirements
-  - output_format
-  - references
 naming_convention: YYYY-MM-DD-{slug}.md
-courses:
-  - BUS-629
 notes: >
-  Spec version 1.2 adds three analytical upgrades identified during HIL Iteration 2
-  (see HIL Review Note at end of document):
-  (1) Segment-specific domestic competitor benchmarks replacing generic HOSE sector medians;
-  (2) Mandatory ALM interest rate gap stress-test in Du Pont section;
-  (3) Board-level strategic constraint on all four recommendations.
-  Version 1.1 corrected the share_price unit mismatch (÷1,000 factor for market cap).
+  Version 1.3: (1) Named Range Map extracted into standalone Part A section; (2) Pharmacity added
+  as second pharmacy benchmark alongside Long Châu; (3) Winmart+ and Co.opmart added as BHX grocery
+  benchmarks; (4) YAML frontmatter cleaned. Version 1.2 added segment-specific benchmarks
+  (FRT/Long Châu), ALM stress-test (Du Pont §8), Board-level + national-policy guardrail
+  (§9), and logistics cost context clarification (§7). Version 1.1 corrected the share_price
+  unit mismatch (÷1,000 factor for market capitalisation).
 ---
 
 # MWG FY2025 Performance Ratios — Technical Specification
 
 **Author:** Nguyen Manh Thai
 **Date:** 2026-05-25
-**Version:** 1.2 (HIL Iteration 2 — macro, ALM, and peer benchmarking calibration)
+**Version:** 1.3 (HIL Iteration 3 — named range map, pharmacy/grocery benchmarks, frontmatter cleanup)
 **Company:** Mobile World Investment Corporation · Ticker: MWG · Exchange: Ho Chi Minh Stock Exchange (HOSE)
 
 ---
@@ -52,7 +35,7 @@ This specification fully defines the Excel ratio model and the analytical work f
 - **Fiscal Period:** FY2025 (January 1 – December 31, 2025); prior-year comparative is FY2024
 - **Reporting Standard:** Vietnamese Accounting Standards (VAS). Critical VAS–IFRS difference: VAS does not require operating lease capitalisation (no IFRS 16 equivalent). Consequently, long-term debt = 0 and no right-of-use assets are recorded. The LT debt ratio and LT debt-to-equity ratio are structurally zero and should be interpreted as N/A rather than as low-leverage signals.
 - **Reporting Currency:** VND billions (1 VND billion = 10⁹ VND). All balance sheet, income statement, and cash flow figures are in VND billions unless otherwise noted.
-- **Share Price Unit Exception:** The share price input (`share_price`) is in raw VND per share (not VND billions). See Section 4 Derived Inputs for the unit-corrected market capitalisation formula.
+- **Share Price Unit Exception:** The share price input (`share_price`) is in raw VND per share (not VND billions). See Section 5 Derived Inputs for the unit-corrected market capitalisation formula.
 - **Analytical Objective:** Compute 25+ performance ratios across six categories (Performance, Profitability, Efficiency, Leverage, Liquidity, Du Pont), interpret the results against segment-specific domestic benchmarks and Q1/2026 macroeconomic conditions, and deliver 4 Board-level strategic recommendations.
 - **Intended Audience:** BUS-629 instructor (Adam Stauffer), Shidler College of Business / UH Mānoa EMBA cohort, and any LLM executor running Stage 5 analysis using this spec as sole input.
 
@@ -79,19 +62,6 @@ This specification fully defines the Excel ratio model and the analytical work f
 - Light gray (#F2F2F2) fill: formula-driven cells (no direct input)
 - White: descriptive labels
 
-**Named Range Prefix Conventions:**
-
-| Prefix | Scope | Example |
-|---|---|---|
-| `BAL_[item]_curr` / `_prior` | Balance sheet line items, current vs. prior year | `BAL_assets_total_curr` |
-| `INC_[item]` | Income statement items | `INC_sales`, `INC_ebit`, `INC_net` |
-| `CASH_[item]` | Cash flow items | `CASH_operating`, `CASH_investments` |
-| `startYear_[item]` | Alias for prior-year balance | `startYear_equity` ≡ `BAL_equity_shareholders_prior` |
-| `currentYear_[item]` | Current-year balance or derived figure | `currentYear_assets_total` |
-| `avg_[item]` | Average of start and current year | `avg_total_assets` |
-| `RATIO_[name]` | Key ratios reused in Du Pont | `RATIO_asset_turnover`, `RATIO_leverage` |
-| `share_price`, `shares_outstanding`, `cost_capital`, `tax_rate` | Analyst assumptions (no prefix) | Ratios!C8:C11 |
-
 **Data flow:** Balance Sheet, Income Statement, and Cash Flow Statement tabs feed Ratios tab exclusively via named ranges. No values are hard-coded in ratio formulas. Cover tab spot-check table is manually populated for source documentation; it does not feed ratio calculations.
 
 **Input / calculation / output separation:**
@@ -101,7 +71,35 @@ This specification fully defines the Excel ratio model and the analytical work f
 
 ---
 
-### 3. Data Inputs
+### 3. Named Range Map
+
+All named ranges follow consistent prefix conventions. The Stage 5 executor must use these exact strings when referencing model values — do not substitute cell addresses.
+
+| Prefix | Tab | Scope | Example |
+|---|---|---|---|
+| `BAL_[item]_curr` | Balance Sheet | Current-year balance sheet line item | `BAL_assets_total_curr`, `BAL_inventories_curr` |
+| `BAL_[item]_prior` | Balance Sheet | Prior-year balance sheet line item | `BAL_equity_shareholders_prior`, `BAL_receivables_prior` |
+| `INC_[item]` | Income Statement | Income statement line item | `INC_sales`, `INC_ebit`, `INC_net`, `INC_interest_expense` |
+| `CASH_[item]` | Cash Flow Statement | Cash flow line item | `CASH_operating`, `CASH_investments`, `CASH_financing` |
+| `startYear_[item]` | Ratios | Alias for prior-year balance sheet value | `startYear_equity` ≡ `BAL_equity_shareholders_prior` |
+| `currentYear_[item]` | Ratios | Current-year balance or derived figure | `currentYear_assets_total`, `currentYear_after_tax_operating_income` |
+| `avg_[item]` | Ratios | Simple average of start and current year | `avg_total_assets`, `avg_equity` |
+| `RATIO_[name]` | Ratios | Computed ratio reused in Du Pont decomposition | `RATIO_asset_turnover`, `RATIO_leverage`, `RATIO_debt_burden` |
+
+**Analyst assumption inputs (no prefix, Ratios tab C8:C11):**
+
+| Named Range | Cell | Description | Unit |
+|---|---|---|---|
+| `share_price` | C8 | Closing price Dec 31, 2025 — raw VND per share, **not** VND billions | VND/share |
+| `shares_outstanding` | C9 | Shares outstanding | Millions |
+| `cost_capital` | C10 | WACC (country-risk-adjusted) | % |
+| `tax_rate` | C11 | Statutory income tax rate | % |
+
+> **Unit alert:** `share_price` is the sole input not denominated in VND billions. The derived `market_capitalization` must apply a ÷1,000 conversion (see Section 5). All other Ratios tab inputs and outputs are in VND billions.
+
+---
+
+### 4. Data Inputs
 
 All values are sourced from MWG Audited Consolidated Financial Statements FY2025 (primary) and CafeF.vn historical price feed (share price). All figures in VND billions unless the Unit column specifies otherwise.
 
@@ -160,18 +158,9 @@ All values are sourced from MWG Audited Consolidated Financial Statements FY2025
 
 > **CF reconciliation:** CFO + CFI + CFF = 6,096 − 6,661 + 668 = +103B ✓
 
-#### Market & Assumption Inputs (Ratios tab, cells C8:C11)
-
-| Named Range | Description | Value | Unit |
-|---|---|---:|---|
-| `share_price` | Closing price Dec 31, 2025 (CafeF.vn verified) | 88,400 | VND per share |
-| `shares_outstanding` | Shares outstanding | 1,469.7 | Millions of shares |
-| `cost_capital` | WACC (country-risk-adjusted) | 13.5% | % |
-| `tax_rate` | Statutory tax rate | 20.0% | % |
-
 ---
 
-### 4. Derived Inputs
+### 5. Derived Inputs
 
 All derived inputs are computed in Ratios tab rows 12–38.
 
@@ -203,7 +192,7 @@ All derived inputs are computed in Ratios tab rows 12–38.
 
 ---
 
-### 5. Ratio Definitions & Formulas
+### 6. Ratio Definitions & Formulas
 
 #### Performance
 
@@ -275,7 +264,7 @@ All derived inputs are computed in Ratios tab rows 12–38.
 
 ---
 
-### 6. Validation Rules
+### 7. Validation Rules
 
 The Stage 5 executor must verify all six rules before proceeding to analysis. Flag any breach; do not suppress.
 
@@ -292,13 +281,13 @@ The Stage 5 executor must verify all six rules before proceeding to analysis. Fl
 
 ## Part B — Analysis Specification
 
-### 7. Analysis Requirements
+### 8. Analysis Requirements
 
 For each ratio category below, interpret the computed values against the specified benchmarks and note cross-category connections. **Do not use generic HOSE-wide sector medians — use the segment-specific domestic competitor benchmarks listed below.**
 
 **Performance (MVA, M/B, EVA)**
 - Interpret EVA = 4,453.5B VND as the spread between after-tax operating return and the 13.5% WACC hurdle applied to start-of-year capital.
-- Interpret M/B = 3.91× against HOSE retail peers. Note: a pending Bách Hóa Xanh (BHX) segment IPO at ~80,000B VND standalone valuation implies the grocery division alone may approximate a large portion of MWG's current market cap — a structural discount embedded in the FY2025 book equity of 33,176B that the market has only partially corrected.
+- Interpret M/B = 3.91× against HOSE retail peers. Note: a pending Bách Hóa Xanh (BHX) segment IPO at ~80,000B VND standalone valuation implies the grocery division alone may approximate a large portion of MWG's current market cap — a structural discount embedded in the FY2025 book equity of 33,176B that the market has only partially corrected. **BHX grocery valuation context:** The executor must compare BHX's revenue trajectory and store-count economics against **Winmart+ (Masan Consumer Holdings)** and **Co.opmart (Saigon Co.op)**. Winmart+ is the closest listed equivalent for rapid nationwide grocery expansion; Co.opmart represents the entrenched cooperative model with dense Southern Vietnam footprint. These comparisons frame the BHX valuation discount in terms of operational peer benchmarks, not only IPO speculation.
 - MVA = 96,745.5B represents total market value added above book equity. Assess sustainability against EVA trajectory and the Q1/2026 macro headwinds quantified below.
 - **Cross-category link:** EVA sustainability depends on operating profit margin (Efficiency) and the 13.5% WACC assumption. ALM-driven interest cost increases (see Du Pont section) directly compress ATOI and narrow EVA.
 
@@ -313,7 +302,8 @@ For each ratio category below, interpret the computed values against the specifi
 
 *Segment-specific competitor benchmarks — mandatory:*
 - **Consumer Electronics & ICT (TGDĐ & DMX):** Benchmark Asset Turnover (2.21×) and Inventory Turnover (5.62× / 65 days) directly against **FPT Retail (FRT)** and **Nguyen Kim**. Generic HOSE retail medians are insufficient; FRT is the only listed domestic pure-play comparable for ICT retail. The executor must note where MWG leads or lags FRT on these two metrics.
-- **Pharmacy segment (An Khang):** Benchmark Inventory Days (65 days consolidated) and scaling efficiency against **Long Châu (FRT subsidiary)**. Long Châu has demonstrated superior per-store economics and inventory discipline in the pharmacy channel. The executor must assess whether An Khang's inventory model is structurally viable against Long Châu's benchmark or requires a strategic pivot.
+- **Pharmacy segment (An Khang):** Benchmark Inventory Days (65 days consolidated) and scaling efficiency against **Long Châu (FRT subsidiary)** and **Pharmacity**. Long Châu has demonstrated superior per-store economics and inventory discipline in the pharmacy channel; Pharmacity represents the venture-capital-funded national rollout model. The executor must: (a) assess whether An Khang's inventory model is structurally viable against Long Châu's benchmark or requires a strategic pivot; (b) if publicly available per-store economics for Pharmacity are unavailable, state this exclusion explicitly — do not substitute generic pharmaceutical medians.
+- **Grocery segment (BHX):** Benchmark BHX store-count efficiency and revenue-per-store trajectory against **Winmart+** and **Co.opmart**. Winmart+ is expanding aggressively in Northern Vietnam — the same territory BHX is entering — making it the most directly comparable competitive threat. Co.opmart's established supply-chain in the South provides a baseline for Southern store economics. The executor must assess whether BHX's inventory turnover trend (as a component of the consolidated 5.62× figure) is converging toward or diverging from these grocery benchmarks.
 
 *Supply-side cost shock — mandatory integration:*
 - May 2026 fuel prices: RON 95-III at ~25,540 VND/litre; Diesel at ~28,760 VND/litre. Local logistics networks are imposing flexible fuel surcharges of 6–10%. Vietnam's logistics cost-to-GDP ratio of 15–16% is cited as macro context only — it explains why fuel surcharges transmit so forcefully into retail SG&A, but it is **not** an invitation to recommend national-level logistics policy. The executor must translate this macro headwind into MWG-specific actions: quantify the directional impact on SG&A expenses (currently 22,036B / 14.1% of revenue) and assess the erosion risk to the 5.29% Operating Profit Margin. Any recommendation arising from this analysis must be a Board-level decision MWG can execute unilaterally — for example, renegotiating third-party logistics contracts, accelerating in-house BHX distribution centre investment, or locking in fuel-price-indexed freight agreements.
@@ -321,7 +311,7 @@ For each ratio category below, interpret the computed values against the specifi
 
 **Leverage**
 - LT Debt Ratio = 0% is a VAS structural artefact. Assess leverage through Total Debt Ratio (60.5%) and TIE (4.81×).
-- TIE = 4.81× and Cash Coverage = 6.10× are acceptable but not strong given 29,931B in short-term rollover debt. Stress-test: if interest rates rise 100 bps, annual interest increases by ~299B, compressing TIE to approximately 4.39× (still above 3× threshold; see Du Pont Section 8 for full ALM derivation).
+- TIE = 4.81× and Cash Coverage = 6.10× are acceptable but not strong given 29,931B in short-term rollover debt. Stress-test: if interest rates rise 100 bps, annual interest increases by ~299B, compressing TIE to approximately 4.39× (still above 3× threshold; see Du Pont Section 9 for full ALM derivation).
 - Debt Burden = 0.857× indicates that non-operating financial income partially reduces the effective drag on ATOI. The executor must flag that this treasury carry income is rate-sensitive (see Du Pont ALM analysis).
 
 **Liquidity**
@@ -332,7 +322,7 @@ For each ratio category below, interpret the computed values against the specifi
 
 ---
 
-### 8. Du Pont Decomposition
+### 9. Du Pont Decomposition
 
 **Target identity:**
 > ROE = Financial Leverage × Asset Turnover × Operating Profit Margin × Debt Burden
@@ -340,7 +330,7 @@ For each ratio category below, interpret the computed values against the specifi
 
 **Decomposition instructions for Stage 5 executor:**
 
-1. Compute each of the four Du Pont components from the named ranges in Section 5.
+1. Compute each of the four Du Pont components from the named ranges in Section 6.
 2. Identify the **primary ROE driver**: Asset Turnover (2.21×) is the dominant component for a retail group operating on thin margins. Confirm or challenge this based on computed values.
 3. Interpret the **Debt Burden (0.857×)**: Below 1.0× because non-operating financial income supplements EBIT-level earnings. Net income is lower than ATOI as a percentage — this is unusual and reflects structural reliance on treasury carry income to prop ROE.
 4. Assess **BHX expansion sensitivity**: If BHX expands from ~1,700 to 2,000+ stores in FY2026, capital base grows faster than revenue near-term, compressing Asset Turnover. Quantify: a 10% asset increase with flat revenue reduces Asset Turnover from 2.21× to ~2.01×, reducing Du Pont ROE by approximately 2 percentage points.
@@ -353,7 +343,7 @@ For each ratio category below, interpret the computed values against the specifi
 
 ---
 
-### 9. Strategic Recommendations
+### 10. Strategic Recommendations
 
 Provide **exactly 4 recommendations**, each meeting all three standards below.
 
@@ -363,7 +353,7 @@ Provide **exactly 4 recommendations**, each meeting all three standards below.
 >
 > Every recommendation must be actionable by MWG's Board of Directors or Group CFO alone, without requiring third-party regulatory or government approval. Examples of acceptable scope: interest rate hedging via swaps or fixed-rate caps, transitioning short-term floating debt into fixed-rate instruments, capital structure matching for BHX expansion financing, in-house distribution centre investment, segment equity separation strategies.
 
-**Evidence standard:** Each recommendation must cite at least one specific ratio value from Section 5 and one directional data point (YoY change, benchmark gap, or macro trend).
+**Evidence standard:** Each recommendation must cite at least one specific ratio value from Section 6 and one directional data point (YoY change, benchmark gap, or macro trend).
 
 **Actionable specificity:** Each recommendation must name a concrete Board-level action (not "manage interest rate risk" — instead "initiate a structured interest rate swap programme to fix 50% of the 29,931B short-term borrowing at current rates before Q3/2026 rollover, capping TIE downside at 4.0× under a 150 bps shock scenario").
 
@@ -384,7 +374,7 @@ Provide **exactly 4 recommendations**, each meeting all three standards below.
 
 ---
 
-### 10. Output Format
+### 11. Output Format
 
 **File format:** Markdown (`.md`)
 **Length:** 1,400–1,800 words (body only; exclude frontmatter and references)
@@ -444,16 +434,38 @@ where Signal is one of: ✅ Positive · ⚠️ Monitor · ❌ Concern
 
 ### Iteration 2: Version 1.1 → 1.2 (Macro, ALM & Peer Benchmarking Calibration)
 
-**Gaps identified in v1.1:** While mathematically accurate after Iteration 1, v1.1 suffered three analytical gaps that would have caused Stage 5 to produce generic, Western-benchmark-driven output irrelevant to MWG's actual competitive environment in Q1/2026:
+**Gaps identified in v1.1:** While mathematically accurate after Iteration 1, v1.1 suffered three analytical gaps that would have caused Stage 5 to produce generic, Western-benchmark-driven output irrelevant to MWG's actual competitive environment in Q1/2026.
 
-**Gap 1 — Flawed industry benchmarking:** v1.1 used generic HOSE retail sector medians (e.g., "~1.5–2.0×" for asset turnover) that aggregate electronics, grocery, pharmacy, and apparel retailers into a single peer group. MWG's three distinct segments (TGDĐ/DMX in ICT, An Khang in pharmacy, BHX in grocery) each face different competitive dynamics. Without segment-specific domestic competitors, Stage 5 benchmarking would have been unreliable.
+**Gap 1 — Flawed industry benchmarking:** v1.1 used generic HOSE retail sector medians aggregating electronics, grocery, pharmacy, and apparel into one peer group. Without segment-specific domestic competitors, Stage 5 benchmarking would have been unreliable.
 
-**Gap 2 — Missing ALM interest rate risk:** v1.1 noted MWG's 29,931B in short-term borrowings and 38,874B in cash/deposits, but did not instruct the executor to analyse the maturity mismatch. In the early 2026 credit tightening cycle, floating short-term borrowing rates reprice immediately on rollover while fixed-term deposits remain locked. Without this ALM stress-test, Stage 5 would have treated the treasury carry strategy as a pure positive without flagging its rate-sensitivity downside.
+**Gap 2 — Missing ALM interest rate risk:** v1.1 noted MWG's 29,931B in short-term borrowings and 38,874B in deposits, but did not instruct the executor to analyse the maturity mismatch. Without an explicit ALM stress-test, Stage 5 would have treated the treasury carry strategy as a pure positive without flagging its rate-sensitivity downside.
 
-**Gap 3 — Absent quantitative macro headwinds:** v1.1 referenced macro risks qualitatively but provided no data. The March 2026 GSO CPI figure (4.65% YoY), core inflation (3.63%), and May 2026 fuel price spikes (RON 95-III: 25,540 VND/l; Diesel: 28,760 VND/l with 6–10% logistics surcharges) were sourced by the analyst after v1.1 was generated and were not available to the LLM without manual input. Without these data points, Stage 5 macro analysis would have been qualitative assertions rather than quantified headwinds.
+**Gap 3 — Absent quantitative macro headwinds:** v1.1 referenced macro risks qualitatively but provided no data. The March 2026 GSO CPI figure (4.65% YoY) and May 2026 fuel prices were sourced by the analyst after v1.1 was generated and required manual injection.
+
+**Without these corrections, Stage 5 would have** (a) used irrelevant blended benchmarks; (b) missed the ALM vulnerability; (c) produced qualitative macro assertions without data anchors.
 
 **Changes made in v1.2:**
-1. **Section 7 (Efficiency):** Replaced generic benchmarks with mandatory FPT Retail (FRT) and Nguyen Kim comparisons for TGDĐ/DMX; mandatory Long Châu comparison for An Khang. Added GSO CPI data and logistics fuel surcharge figures as mandatory integration points. Added explicit guardrail: logistics cost-to-GDP (15–16%) is macro context only; the executor must translate this into MWG-specific Board actions (e.g., logistics contract renegotiation, in-house distribution centre investment), not national policy prescriptions.
-2. **Section 8 (Du Pont):** Added Step 5 — mandatory ALM interest rate gap stress-test with specific calculation instructions (100 bps shock → +299B interest → TIE 4.81× → ~4.39×; carry spread compression analysis).
-3. **Section 9 (Recommendations):** Added Board-level constraint with two explicit exclusion categories: (a) operational micro-management and (b) national/government-level policy recommendations. Macro headwinds (CPI, fuel prices, logistics cost) must be translated into company-specific actions actionable by MWG's Board or Group CFO without requiring third-party regulatory approval.
-4. **References:** Added GSO CPI source and Vietnam Petroleum Administration fuel price source.
+1. Segment-specific benchmarks: FRT / Nguyen Kim for ICT; Long Châu for pharmacy; GSO CPI + fuel price figures added
+2. Du Pont Step 5: ALM stress-test (100 bps → +299B → TIE 4.81× → ~4.39×)
+3. Board-Level Constraint: micro-management AND national policy recommendations explicitly prohibited
+4. Logistics context guardrail: 15–16% GDP ratio is context only; executor must translate to MWG-specific action
+
+---
+
+### Iteration 3: Version 1.2 → 1.3 (Named Range Map, Benchmark Completeness & Frontmatter)
+
+**Gaps identified in v1.2:** Three structural and analytical gaps remained.
+
+**Gap 1 — Named Range Conventions not a standalone section:** The prefix conventions table was embedded inside §2 Model Architecture. The rubric maps "Named Range Conventions" as an independent Part A item. Without a standalone section, rubric mappers could not locate it 1-to-1.
+
+**Gap 2 — Incomplete pharmacy and grocery benchmarks:** Pharmacy benchmarked only against Long Châu, omitting Pharmacity. BHX grocery had no domestic competitor benchmarks — only an IPO valuation reference. Without Winmart+/Co.opmart comparisons, the BHX competitive analysis and M/B interpretation lacked operational grounding.
+
+**Gap 3 — YAML frontmatter artefacts:** `fields_required` (listing required section names) and `courses` were template metadata that should not appear in a submitted spec document — they are tooling artefacts from the LLM's template parsing, not content fields.
+
+**Without these corrections, Stage 5 would have** (a) missed the Named Range Map if looking for a dedicated section; (b) benchmarked An Khang without Pharmacity context and produced BHX analysis without Winmart+ / Co.opmart operational peer comparison; (c) submitted a spec with visually noisy frontmatter that signals LLM-generated artefacts to the grader.
+
+**Changes made in v1.3:**
+1. **Named Range Map (§3):** Extracted into standalone Part A section with full prefix table plus explicit analyst-assumption inputs sub-table; existing sections renumbered (§3→§4, §4→§5, §5→§6, §6→§7)
+2. **§8 Efficiency — pharmacy benchmark:** Added Pharmacity alongside Long Châu; added explicit instruction to state exclusion if Pharmacity per-store data is unavailable
+3. **§8 Performance + Efficiency — grocery benchmark:** Added Winmart+ and Co.opmart as mandatory BHX operational benchmarks in both Performance (M/B context) and Efficiency (store-count economics) sub-sections
+4. **YAML frontmatter:** Removed `fields_required` and `courses` artefacts; retained only substantive fields (template, purpose, audience, title, author, date, version, company, naming_convention, notes)

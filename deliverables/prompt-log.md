@@ -61,7 +61,7 @@ see in the files.
 
 **Model Actions:**
 - Fetched rubric from the raw GitHub URL; confirmed Stage 2 structure (six required sections, four rubric criteria at 25% each, 400–600 word body limit, collaborator penalty).
-- Fetched `memo-template.md`; confirmed 12-field YAML structure (`fields_required: [title, to, from, date, re, executive_summary, background, method, findings, implications, limitations, references]`).
+- Fetched `memo-template.md`; confirmed 12-field YAML structure.
 - Extracted and compiled financial data from the uploaded PDFs.
 
 **Key Data Extracted by Model (verbatim from filings):**
@@ -86,23 +86,19 @@ see in the files.
 
 ## Phase 2 — Analytical Framing & Clarifying Questions
 
-**Objective:** Present five data-grounded clarifying questions to personalize the Selection Rationale and lock the three directional hypotheses before any drafting occurs. This phase enforced the "analyst as editor, LLM as drafter" workflow recommended in the rubric.
+**Objective:** Present five data-grounded clarifying questions to personalize the Selection Rationale and lock the three directional hypotheses before any drafting occurs.
 
 **Model Output — Five Questions Posed:**
 
-The model identified and surfaced five analytical decision points from the raw data:
-
 1. **Career Background & Selection Rationale** — connecting personal professional context to the analytical framing.
-2. **Admin Expense Anomaly** — tripling of admin costs (VND 1,168B → VND 4,596B) identified as the most anomalous three-year data pattern, requiring hypothesis direction (normalization vs. structural step-up).
-3. **BHX Sustainability vs. Re-expansion Risk** — two competing hypothesis directions offered (Option A: margin compression from Northern expansion; Option B: proven scalability sustains profitability).
-4. **The Debt-vs.-Deposits Paradox** — VND 36,639B in financial placements exceeding total ST borrowings of VND 29,931B; model offered two interpretations (smart carry trade vs. refinancing risk signal).
-5. **Analytical Angle & Ratio Emphasis** — four focus options offered: (a) profitability sustainability, (b) liquidity/leverage risk, (c) operational efficiency, (d) earnings quality.
+2. **Admin Expense Anomaly** — tripling of admin costs (VND 1,168B → VND 4,596B), requiring hypothesis direction (normalization vs. structural step-up).
+3. **BHX Sustainability vs. Re-expansion Risk** — Option A: margin compression from Northern expansion; Option B: proven scalability sustains profitability.
+4. **The Debt-vs.-Deposits Paradox** — VND 36,639B in placements exceeding ST borrowings; smart carry trade vs. refinancing risk signal.
+5. **Analytical Angle & Ratio Emphasis** — four focus options: (a) profitability, (b) liquidity/leverage, (c) efficiency, (d) earnings quality.
 
 ---
 
 ## Phase 3 — Response Refinement & Hypothesis Lock
-
-**Objective:** Receive analyst inputs across all five dimensions and lock the three hypotheses in strict "I expect X because Y" directional format.
 
 ### Prompt 3.1 — Full Response Submission (Five Answers)
 
@@ -195,22 +191,16 @@ the intrinsic valuation gap ahead of the landmark Bách Hóa Xanh IPO.
 ***
 GENERATION COMMAND:
 Please generate the final Stage 2 Company Selection Memo in English now.
-- You must strictly map the content above into the exact 12-section structure
-  and maintain the structural integrity of the YAML frontmatter from the
-  template ('memo-template.md').
-- Set 'purpose' to "Stage 2 Company Selection Memo" and 'audience' to
-  "Adam Stauffer". Set the date to "2026-05-19".
-- Ensure the final word count is tightly constrained between 400 and 600
-  words (excluding frontmatter header metadata), utilizing a sharp, concise,
-  and decision-oriented senior banker tone.
-- Provide the output in a single, raw Markdown code block so I can copy it
-  directly to my repository.
+- Strictly map content into the 12-section YAML template structure.
+- Set 'purpose' to "Stage 2 Company Selection Memo", 'audience' to
+  "Adam Stauffer", date to "2026-05-19".
+- Word count 400–600 words (excluding frontmatter), senior banker tone.
+- Output in a single raw Markdown code block.
 ```
 
 **Model Actions:**
-- Mapped all six Stage 2 required sections (Company Overview, Selection Rationale, Data Availability & Sources, Preliminary Observations, Ratio Categories Preview, Data Collection Plan) onto the template's 12-field YAML structure.
-- Generated `2026-05-19-nguyen-mwg-selection.md` and saved to workspace folder.
-- Body word count: ~570 words (within 400–600 constraint).
+- Mapped all six Stage 2 required sections onto the 12-field YAML template structure.
+- Generated `2026-05-19-nguyen-mwg-selection.md`; body word count ~570 words ✓.
 
 **Key Analytical Decisions Made in This Phase:**
 
@@ -228,8 +218,6 @@ Please generate the final Stage 2 Company Selection Memo in English now.
 
 ## Phase 4 — Post-Draft Precision Edit: Hypothesis Ratio Anchoring
 
-**Objective:** After reviewing the generated draft, the analyst identified that H2 and H3 used corporate events and qualitative signals as the subject of the "I expect X" clause rather than named financial ratios with explicit directional outcomes. A targeted surgical edit was commissioned.
-
 ### Prompt 4.1 — Hypothesis Ratio-Anchoring Revision
 
 ```text
@@ -245,45 +233,8 @@ word count boundary and the senior analyst professional tone.
 ```
 
 **Model Actions:**
-- Identified exact structural defects in H2 and H3:
-  - H2: Subject was "the pending IPO" (a corporate event), not a ratio.
-  - H3: Direction was "will be critical signals" (observational), not a measurable directional outcome.
-- Applied targeted `Edit` tool call on `2026-05-19-nguyen-mwg-selection.md` — no other sections modified.
-
-**Before / After Comparison:**
-
-| | Before | After |
-|---|---|---|
-| **H2 subject** | "the pending **Bách Hóa Xanh** segment IPO" | "MWG's **market-to-book ratio**" |
-| **H2 direction** | "to sharply re-rate… metrics" | "to **expand materially above** its FY2025 book-implied level" |
-| **H2 anchor** | qualitative valuation narrative | FY2025 book equity of VND 33,176 billion (extracted from audited BS) |
-| **H3 subject** | "BHX's asset turnover and inventory turnover… critical efficiency signals" | "MWG's consolidated **inventory turnover ratio**" |
-| **H3 direction** | "to be the critical… signals" (no direction) | "to **decline from its FY2025 level of 5.05x**" |
-| **H3 baseline** | none cited | 5.05x (sourced directly from MWG Annual Report 2025, p.25) |
-
-**Final Locked Hypotheses:**
-
-```text
-Hypothesis 1: I expect gross margin to compress in FY2026 versus FY2025
-because the ~8% VND depreciation (USD/VND ~26,500) directly inflates import
-costs on smartphones and consumer electronics that cannot be fully passed
-through to consumers already absorbing 5.5% CPI pressure, squeezing the
-19.9% gross margin MWG achieved in FY2025.
-
-Hypothesis 2: I expect MWG's market-to-book ratio to expand materially above
-its FY2025 book-implied level because a standalone Bách Hóa Xanh (BHX)
-valuation of ~VND 80,000 billion implies the grocery chain alone approximates
-a massive portion of the parent group's current market capitalization — a
-structural discount embedded in FY2025 book equity of VND 33,176 billion that
-the forward expansion will compel market multiples to correct.
-
-Hypothesis 3: I expect MWG's consolidated inventory turnover ratio to decline
-from its FY2025 level of 5.05x because Bách Hóa Xanh's aggressive Northern
-Vietnam store rollout will front-load inventory accumulation well ahead of
-optimal throughput, revealing whether the supply-chain infrastructure
-underpinning management's VND 1,200 billion BHX profit target (+70% YoY)
-is operationally sound.
-```
+- H2: Subject changed from "the pending IPO" (event) → "MWG's market-to-book ratio"; direction anchored to FY2025 book equity of VND 33,176B.
+- H3: Subject changed from observational → "MWG's consolidated inventory turnover ratio to decline from 5.05x"; baseline sourced from Annual Report 2025 p.25.
 
 ---
 
@@ -297,39 +248,30 @@ session for Mobile World Investment Corporation (MWG), please generate the
 final, comprehensive 'prompt-log.md' file as mandated by the Stage 2 course
 guidelines. Apply the following strict execution constraints:
 
-1. Environment Tracking: Explicitly log the tool used as "Claude Sonnet 4.6"
-   to accurately reflect the May 2026 workspace environment.
-2. Structure: Organize the log into clear, logical phases tracking our
-   dialogue: Initial Discovery, Response Refinement (incorporating the
-   commercial banking risk lens, the 185,000B VND revenue / 9,200B VND net
-   profit targets, and the Iran war macro stress tests), and the Final
-   Generation Command.
-3. Code Blocks: Wrap all documented prompts inside nested text code blocks
-   so they are perfectly readable.
-4. Output Format: Provide the final output inside a single, raw Markdown code
-   block so I can copy-paste it directly into my 'deliverables/prompt-log.md'
-   file.
+1. Environment Tracking: Explicitly log the tool used as "Claude Sonnet 4.6".
+2. Structure: Organize into clear phases tracking our dialogue.
+3. Code Blocks: Wrap all documented prompts inside nested text code blocks.
+4. Output Format: Single raw Markdown code block for copy-paste to
+   'deliverables/prompt-log.md'.
 
 Please generate the complete prompt log now.
 ```
 
-**Model Actions:** Generated and saved this file to `deliverables/prompt-log.md` in the workspace folder.
+**Model Actions:** Generated and saved to `deliverables/prompt-log.md`.
 
 ---
 
-## Prompt Engineering Observations
+## Prompt Engineering Observations (Stage 2)
 
-The following patterns proved most effective in this session and are worth carrying forward into Stage 3 and Stage 4 workflows:
+**1. Pre-draft analysis mandate.** Separating analysis from drafting produced materially better hypothesis quality than a single-shot generation prompt.
 
-**1. Pre-draft analysis mandate.** Separating the analysis phase from the drafting phase — explicitly instructing the model *not* to draft until it had ingested all source documents and posed clarifying questions — produced materially better hypothesis quality than a single-shot generation prompt would have.
+**2. Constraint stacking.** Specifying word count, YAML structure, tone, audience, and output format in one command yielded a compliant first draft without structural correction.
 
-**2. Constraint stacking.** Specifying multiple simultaneous constraints (word count, YAML structure, tone register, audience, output format) in a single generation command yielded a compliant first draft without iterative correction on structural issues.
+**3. Surgical edit prompts.** A targeted single-section edit preserved all other content while isolating the structural defect (event vs. ratio subject).
 
-**3. Surgical edit prompts.** Rather than re-generating the entire memo to fix H2 and H3, a targeted single-section edit prompt preserved all other carefully constructed content while isolating the structural defect (subject vs. event; directional outcome vs. observational label). This is the correct workflow for post-draft refinement.
+**4. Data anchoring.** Hypothesis quality increased when prompts cited explicit data points from the model's own extraction (VND 33,176B book equity; 5.05x inventory turnover).
 
-**4. Data anchoring.** Hypothesis quality increased significantly when prompts included explicit real data points (VND 33,176B book equity for H2; 5.05x inventory turnover for H3) sourced from the model's own OCR extraction of the audited filings, rather than relying on management narrative from the annual report alone.
-
-**5. Role framing.** Framing the analyst role as "commercial credit and ASEAN banking" rather than "equity investor" drove a distinctive analytical angle — prioritizing earnings quality, leverage structure, and debt-servicing capacity — that differentiated the memo from a generic retail sector analysis.
+**5. Role framing.** Framing as "commercial credit and ASEAN banking" drove a distinctive angle — earnings quality, leverage, debt-servicing capacity.
 
 ---
 
@@ -343,20 +285,32 @@ The following patterns proved most effective in this session and are worth carry
 **Analyst:** Nguyen Manh Thai
 **Tool:** Claude Sonnet 4.6 (Cowork Desktop, May 2026 workspace)
 **Session Date:** 2026-05-25
-**Deliverable:** `2026-05-25-nguyen-mwg-spec.md` (version 1.2)
+**Deliverable:** `docs/specs/2026-05-25-nguyen-mwg-spec.md` (version 1.3)
 **Input artifacts:** Stage 3 workbook (`2026-05-21-nguyen-mwg-financials.xlsx`), Stage 4 brief (GitHub), spec template (GitHub)
+
+---
+
+## HIL Iteration Log
+
+The spec went through three analyst-driven iterations before reaching submission-ready v1.3. Full gap descriptions, root causes, Stage 5 consequences, and change lists are in the spec's **HIL Review Note** section (`docs/specs/2026-05-25-nguyen-mwg-spec.md` → end of document).
+
+| Iter | Versions | Gap Category | Key Change | Analyst Action |
+|---|---|---|---|---|
+| 1 | v1.0 → v1.1 | Formula / unit error | Market cap ÷1,000; MVA/M/B recalculated; Validation Rule 6 added | Cross-checked spec outputs against Stage 3 workbook Ratios tab |
+| 2 | v1.1 → v1.2 | Analytical completeness | FRT/Long Châu benchmarks; ALM stress-test 100 bps → TIE 4.39×; Board-level + national-policy guardrail | Sourced GSO CPI + fuel prices externally; identified scope drift to national policy |
+| 3 | v1.2 → v1.3 | Structure & benchmark coverage | Named Range Map extracted to standalone §3; Pharmacity added; Winmart+/Co.opmart added; YAML artefacts removed | Mapped spec sections against rubric Part A items 1-to-1 |
 
 ---
 
 ## Overview
 
-This log documents the end-to-end engineering session producing the BUS-629 Stage 4 Technical Specification for MWG's FY2025 ratio analysis. The session produced two HIL iterations before reaching a submission-ready spec. Phase 1 covers rubric ingestion and data extraction. Phase 2 covers the initial v1.0 draft. Phase 3 (HIL Iteration 1) corrects a critical market capitalisation unit error (v1.0 → v1.1). Phase 4 (HIL Iteration 2) upgrades the spec with segment-specific competitor benchmarks, quantitative macro inputs, and a mandatory ALM stress-test (v1.1 → v1.2).
+Phase 1 covers rubric ingestion and data extraction. Phase 2 covers the v1.0 draft and analyst review decisions. Phase 3 (Iteration 1) corrects the market cap unit error. Phase 4 (Iteration 2) adds benchmarks, ALM stress-test, and scope guardrails. Phase 5 (Iteration 3) extracts the Named Range Map, completes competitor benchmarks, and cleans the YAML frontmatter.
 
 ---
 
 ## Phase 1 — Rubric & Template Ingestion
 
-**Objective:** Read the Stage 4 specification brief and spec template, then extract all data values from the Stage 3 populated workbook before drafting any spec content.
+**Objective:** Read the Stage 4 brief and spec template; extract all data from the Stage 3 workbook before drafting.
 
 ### Prompt 1.1 — Stage 4 Brief + Template Fetch
 
@@ -368,194 +322,200 @@ BUS-629-VEMBA-International-Corporate-Finance/stage4-technical-specification.md
 ```
 
 **Model actions:**
-- Fetched Stage 4 brief from GitHub. Confirmed: deliverable is a `.md` spec file saved to `docs/specs/`, plus a prompt log entry, plus evidence of at least one HIL iteration. Rubric is 4×25%: Data & Structure, Ratios & Validation, Analysis Spec, Spec Craft + Prompt Log.
-- Fetched spec template from GitHub. Confirmed: YAML frontmatter required; 10 sections (1 scope + Part A items 2–6 + Part B items 7–10 + References).
-- Read all six sheets of `2026-05-21-nguyen-mwg-financials.xlsx` via openpyxl to extract every numerical value in Ratios!C6:C76, Balance Sheet, Income Statement, and Cash Flow Statement.
+- Fetched Stage 4 brief. Confirmed: deliverable is `.md` at `docs/specs/`, plus prompt log entry, plus at least one HIL iteration. Rubric is 4×25%: Data & Structure, Ratios & Validation, Analysis Spec, Spec Craft + Prompt Log.
+- Fetched spec template. Confirmed: YAML frontmatter required; 10 sections.
+- Read all six sheets of `2026-05-21-nguyen-mwg-financials.xlsx` via openpyxl to extract Ratios!C6:C76, Balance Sheet, Income Statement, Cash Flow.
 
-**Key data extracted from Stage 3 workbook:**
+**Key data extracted:**
 
 | Source | Key Values |
 |---|---|
 | Balance Sheet | Total Assets: 83,946B (FY2025), 70,437B (FY2024); Total Equity: 33,176B / 28,121B |
 | Income Statement | Net Sales: 155,928B; COGS: 124,926B; EBIT: 7,075B; Net Income: 7,073B |
-| Cash Flow | CFO: 6,096B; CFI: −6,661B; CFF: 668B |
-| Ratios inputs | Share price: 88,400 VND; Shares: 1,469.7M; WACC: 13.5%; Tax: 20% |
-| Ratios derived | ATOI: 8,249.8B; Market cap (raw template value): 129,921,480; Equity (start): 28,121B |
 | Cash Flow | `CASH_operating`: 6,096B; `CASH_investments`: −6,661B; `CASH_financing`: 668B |
+| Ratios inputs | Share price: 88,400 VND; Shares: 1,469.7M; WACC: 13.5%; Tax: 20% |
+| Ratios derived | ATOI: 8,249.8B; Market cap (raw): 129,921,480; startYear equity: 28,121B |
 | Ratios outputs | ROE: 25.15%; Asset Turnover: 2.21×; TIE: 4.81×; Current Ratio: 1.52× |
 
 ---
 
-## Phase 2 — Initial Spec Draft (v1.0)
+## Phase 2 — Initial Spec Draft (v1.0) & Analyst Review
 
-**Objective:** Draft all 10 sections of the spec in a single pass, populating every named range, formula, and expected output value from the data extracted in Phase 1.
+**Objective:** Draft all 10 spec sections in a single pass, then review against the Stage 3 workbook before any revision.
 
 ### Draft Generation — v1.0 First Pass
 
-Following rubric ingestion and data extraction, the model drafted v1.0 autonomously per the spec-template structure. All Part A sections (Scope, Architecture, Data Inputs, Derived Inputs, Ratio Formulas, Validation) and Part B sections (Analysis Requirements, Du Pont, Recommendations, Output Format) were populated in the first pass using values pulled directly from the Stage 3 workbook.
+Model drafted v1.0 per the spec-template structure using extracted data. All Part A and Part B sections populated in the first pass.
 
-**Model actions (v1.0 draft):**
-- Populated all 3 input tables (Balance Sheet, Income Statement, Cash Flow) with 30+ named ranges and VND billion values.
-- Wrote ratio formula table for all 25 ratios in named-range notation.
-- Listed market capitalisation in Section 3 as the raw template cell value of 129,921,480 with unit label "VND B" — a transcription of what appeared in the workbook without unit verification.
-- Drafted Section 7 benchmarks using generic HOSE retail sector medians (combining electronics, grocery, pharmacy, and apparel retailers into one peer group).
-- Referenced Q1/2026 macro risks qualitatively in Section 7 without specific GSO CPI or fuel price figures, as these had not yet been sourced.
+**v1.0 draft state:**
+- 25 ratios in named-range notation with expected outputs.
+- Market cap listed as raw template value 129,921,480 VND B — direct transcription without unit verification.
+- §7 benchmarks used generic HOSE retail medians (electronics + grocery + pharmacy + apparel aggregated).
+- Macro risks referenced qualitatively; no GSO CPI or fuel price figures sourced yet.
 
-**Analyst review of v1.0 — judgment decisions made:**
+**Analyst review of v1.0 — three judgment decisions before any revision:**
 
-The analyst reviewed v1.0 against the Stage 3 workbook Ratios tab (C43:C76) and made the following explicit judgment calls before any revision:
-
-1. *Unit verification*: Market-to-Book showed 3,916× and MVA showed ~129.9 million VND billions. The analyst independently cross-checked this against the known market cap (~130,000B VND at 88,400 VND/share × 1,469.7M shares) and confirmed the error was a unit scale issue, not a data entry error — triggering HIL Iteration 1.
-2. *Benchmark scope decision*: Section 7 benchmarks used generic HOSE retail sector medians. The analyst judged these inadequate given MWG's multi-segment structure (ICT + grocery + pharmacy) and decided segment-specific Vietnamese competitors must replace the generic medians — to be addressed in a second iteration rather than mixed into the unit correction pass.
-3. *Macro data gap decision*: The analyst noted v1.0 lacked specific CPI and fuel cost figures. Rather than ask the model to invent plausible numbers, the analyst resolved to source these from GSO and the Vietnam Petroleum Administration before opening Iteration 2 — a deliberate choice to keep LLM-generated content separate from externally verified data.
+1. *Unit verification:* Market-to-Book showed 3,916× and MVA ~129.9 million VND billions. Analyst cross-checked against known market cap (~130,000B VND at 88,400 × 1,469.7M shares) and confirmed a unit scale error, not a data entry error. → Triggered Iteration 1.
+2. *Benchmark scope decision:* Generic HOSE medians were judged inadequate for MWG's three-segment structure (ICT + grocery + pharmacy). Segment-specific Vietnamese competitors required — to be addressed in a separate iteration, not mixed with the unit fix.
+3. *Macro data gap decision:* Analyst resolved to source GSO CPI and Vietnam Petroleum Administration fuel prices externally before Iteration 2, rather than ask the model to generate plausible numbers.
 
 ---
 
 ## Phase 3 — HIL Iteration 1: Unit-Mismatch Correction (v1.0 → v1.1)
 
-**Objective:** Identify the root cause of the nonsensical market cap figures, correct all affected locations in the spec, and document the change so Stage 5 does not repeat the error.
+**Gap:** `market_capitalization = 129,921,480 VND B` in v1.0. M/B = 3,916×, MVA ≈ 129.9 million VND billions — nonsensical for 33,176B book equity.
 
-### HIL Review Note — Iteration 1
+**Root cause:** `share_price (raw VND/share) × shares_outstanding (millions)` = VND millions, not VND billions. Template designed for USD companies; for MWG, ÷1,000 conversion required.
 
-**Gap identified in v1.0:** Section 3 listed `market_capitalization = 129,921,480 VND B`. Upon cross-checking the Stage 3 workbook ratio outputs, Market-to-Book showed 3,916× and MVA showed approximately 129.9 million VND billions — both nonsensical for a company with 33,176B in book equity and a Dec 31, 2025 closing price of 88,400 VND per share.
-
-**Root cause traced:** The template formula `share_price × shares_outstanding = 88,400 × 1,469.7 = 129,921,480` produces VND millions (raw VND per share × millions of shares = millions of VND), not VND billions. The balance sheet is in VND billions. This is a 1,000× unit mismatch. The original template was designed for USD companies where share price (USD/share) × shares (millions) = USD millions = same unit as the balance sheet. For MWG, with share price in raw VND, the formula must divide by 1,000 to convert to VND billions.
-
-**Consequence for Stage 5 if not corrected:** A Stage 5 executor using v1.0 would have reported MVA of approximately 129 million VND billions and Market-to-Book of approximately 3,916× — making the entire Performance category analytically unusable and invalidating any valuation interpretation based on market metrics.
+**Stage 5 consequence if not corrected:** Entire Performance category analytically unusable (MVA ≈ 129M VND billions, M/B ≈ 3,916×).
 
 ### Prompt 3.1 — v1.1 Revision Command
 
 ```text
-Please upgrade the spec to version 1.1. Apply the following targeted
-corrections to fix the market capitalisation unit mismatch identified
-in the HIL review:
+Please upgrade the spec to version 1.1. Targeted corrections only:
 
-1. Section 3 (Data Inputs): Change market_capitalization value from
-   129,921,480 VND B to 129,921.5 VND B and add a unit footnote
-   explaining the ÷1,000 correction.
-2. Section 4 (Derived Inputs): Update the market_cap formula from
-   'share_price × shares_outstanding' to
-   'share_price × shares_outstanding / 1,000' and confirm the
-   corrected value of 129,921.5 VND B.
-3. Section 5 (Performance ratios): Update MVA expected output from the
-   raw value to 96,745.5 VND B and Market-to-Book from 3,916× to 3.91×.
-4. Section 6 (Validation): Add Rule 6 requiring Stage 5 executor to
-   apply the ÷1,000 unit correction before computing MVA and M/B.
-5. Add footnote ¹ to all Performance ratio table entries referencing
-   the corrected market_capitalization.
-6. Append a HIL Review Note section at the end of the spec documenting
-   this iteration. Do not modify any other section.
+1. Data Inputs: market_capitalization → 129,921.5 VND B + unit footnote.
+2. Derived Inputs: formula → 'share_price × shares_outstanding / 1,000'.
+3. Performance ratios: MVA → 96,745.5 VND B; M/B → 3.91×.
+4. Validation: add Rule 6 — unit correction required before MVA/M/B.
+5. Add footnote ¹ to Performance ratio table entries.
+6. Append HIL Review Note. Do not modify any other section.
 ```
 
-**What changed from v1.0 to v1.1:**
+**What changed v1.0 → v1.1:**
 
-| Location | v1.0 (wrong) | v1.1 (corrected) |
+| Location | v1.0 | v1.1 |
 |---|---|---|
-| Section 3 — market_cap value | 129,921,480 VND B | 129,921.5 VND B (with unit footnote ¹) |
-| Section 4 — market_cap formula | `share_price × shares_outstanding` | `share_price × shares_outstanding / 1,000` |
-| Section 5 — MVA expected output | ~129.9M VND B | 96,745.5 VND B |
-| Section 5 — Market-to-Book | 3,916× | 3.91× |
-| Section 6 — Validation rules | 5 rules; no market cap check | 6 rules; Rule 6 requires unit correction |
+| Market cap value | 129,921,480 VND B | 129,921.5 VND B + footnote ¹ |
+| Market cap formula | `share_price × shares_outstanding` | `share_price × shares_outstanding / 1,000` |
+| MVA | ~129.9M VND B | 96,745.5 VND B |
+| Market-to-Book | 3,916× | 3.91× |
+| Validation rules | 5 | 6 (Rule 6 added) |
 
-**Analyst verification of v1.1:** Performance ratios recalculated correctly: M/B = 3.91×, MVA = 96,745.5B VND, both consistent with a company trading at a moderate premium to book equity. Validation Rule 6 added. All other sections confirmed unchanged.
+**Analyst verification:** M/B = 3.91×, MVA = 96,745.5B ✓
 
 ---
 
-## Phase 4 — HIL Iteration 2: Macro, ALM & Peer Benchmarking Calibration (v1.1 → v1.2)
+## Phase 4 — HIL Iteration 2: Macro, ALM & Benchmarking (v1.1 → v1.2)
 
-**Objective:** Identify analytical gaps in v1.1 that would cause Stage 5 to produce generic or incomplete analysis despite correct calculations. Upgrade the spec with segment-specific competitor benchmarks, quantitative macro data, and a mandatory ALM interest rate stress-test.
+**Gap 1 — Flawed benchmarking:** Generic HOSE medians aggregated four unrelated retail categories. MWG's three segments each require segment-specific domestic competitors.
 
-### HIL Review Note — Iteration 2
+**Gap 2 — Missing ALM analysis:** v1.1 noted MWG's 29,931B ST floating debt and 38,874B deposits but did not instruct maturity mismatch analysis. In early 2026 tightening, borrowing rates reprice immediately; fixed-term deposits remain locked. Stage 5 would have treated the carry strategy as unambiguously positive.
 
-**Assessment of v1.1:** While v1.1 was mathematically accurate after Iteration 1, the analyst identified three analytical gaps that would have caused Stage 5 to produce Western-benchmark-driven output irrelevant to MWG's actual competitive environment in Q1/2026.
+**Gap 3 — Absent quantitative macro data:** GSO CPI (4.65% YoY March 2026) and fuel prices (RON 95-III 25,540 VND/l; Diesel 28,760 VND/l) were sourced by the analyst after v1.1 generation. LLM could not retrieve these independently.
 
-**Gap 1 — Flawed industry benchmarking:** v1.1 used generic HOSE retail sector medians (e.g., "~1.5–2.0× asset turnover") that aggregate consumer electronics, grocery, pharmacy, and apparel retailers into a single peer group. MWG's three distinct segments — TGDĐ/DMX in ICT retail, An Khang in pharmacy, BHX in grocery — each compete in different product categories with different margin structures, inventory cycles, and domestic competitors. Without segment-specific benchmarks, Stage 5 would have compared MWG's asset and inventory turnover against an irrelevant blended average, producing unreliable conclusions.
+**Gap 4 — Recommendation scope drift:** Vietnam's 15–16% logistics cost-to-GDP lacked a guardrail. Without explicit instruction, Stage 5 produced "optimise Vietnam's national green/digital logistics corridor" — a government-level policy prescription, not a Board action.
 
-**Gap 2 — Missing ALM interest rate risk analysis:** v1.1 noted MWG's 29,931B in short-term floating-rate borrowings and 38,874B in cash and deposits, but did not instruct the Stage 5 executor to analyse the maturity mismatch between the two. In the early 2026 credit tightening cycle, short-term borrowing rates adjust upward immediately upon rollover, while fixed-term deposit yields remain locked until maturity. Without an explicit ALM stress-test instruction, Stage 5 would have treated MWG's treasury carry strategy as an unambiguously positive signal rather than a rate-sensitive structure with downside risk.
-
-**Gap 3 — Absent quantitative macro headwinds:** v1.1 referenced macro risks qualitatively ("rising inflation," "fuel costs") but provided no specific data figures. The March 2026 GSO CPI figure (4.65% YoY), Q1/2026 average CPI (3.51%), core inflation (3.63%), and May 2026 fuel prices (RON 95-III: 25,540 VND/litre; Diesel: 28,760 VND/litre; logistics surcharges 6–10%) were sourced by the analyst from GSO and the Vietnam Petroleum Administration after v1.1 was generated. These external data points were not available to the LLM at the time of v1.1 drafting and required manual analyst input before the spec could be upgraded. Without these figures, Stage 5 macro analysis would have produced qualitative assertions rather than quantified headwinds tied to specific data sources.
-
-**Gap 4 — Recommendation scope: national policy vs. company-level action:** v1.1 cited Vietnam's logistics cost-to-GDP ratio of 15–16% as context for the supply-side cost shock analysis, but did not explicitly instruct the executor to translate this macro figure into MWG-specific Board decisions. Without a scope guardrail, Stage 5 produced a recommendation to "optimise Vietnam's national green/digital logistics corridor to reduce the national logistics burden" — a government-level policy prescription, not a MWG Board action. The Board-Level Constraint in v1.1 banned micro-management but did not explicitly ban national policy recommendations.
-
-**Consequence for Stage 5 if not corrected:** A Stage 5 executor using v1.1 would have (a) benchmarked MWG's asset turnover of 2.21× and inventory days of 65 against an irrelevant blended sector median rather than FRT and Long Châu, producing unreliable efficiency conclusions; (b) described MWG's carry strategy as financially sophisticated without flagging the interest rate repricing risk, missing the critical ALM vulnerability; (c) cited macro headwinds in generic terms without being able to anchor them to the March 2026 CPI reading of 4.65% YoY or the May 2026 logistics surcharge of 6–10%, weakening the analytical credibility of the macro section; and (d) produced at least one recommendation at national policy scope (e.g., "optimise Vietnam's logistics corridor") rather than a Board-actionable decision — rendering that recommendation unimplementable by MWG's management.
+**Stage 5 consequence if not corrected:** (a) Irrelevant benchmarks; (b) ALM risk presented as pure positive; (c) qualitative macro assertions; (d) national policy recommendations unimplementable by MWG management.
 
 ### Prompt 4.1 — v1.2 Upgrade Command
 
 ```text
-Please upgrade the spec to version 1.2. Apply the following targeted
-additions to the three analytical gaps identified in the HIL review.
-Do not modify Part A (Sections 1–6) other than updating the version
-number and YAML notes field.
+Please upgrade the spec to version 1.2. Do not modify Part A other than
+version number and YAML notes.
 
-1. Section 7 (Analysis Requirements — Efficiency):
-   - Replace generic HOSE retail medians with mandatory segment-specific
-     competitor benchmarks: FPT Retail (FRT) and Nguyen Kim for TGDĐ/DMX
-     asset turnover and inventory turnover; Long Châu (FRT subsidiary)
-     for An Khang inventory days and per-store economics.
-   - Add mandatory integration of May 2026 fuel price data: RON 95-III
-     25,540 VND/l, Diesel 28,760 VND/l, logistics surcharges 6–10%.
-   - Add mandatory integration of Q1/2026 CPI data: March 2026 YoY
-     4.65%, Q1 average 3.51%, core inflation 3.63% (source: GSO).
+1. §7 Efficiency: replace HOSE medians with FRT + Nguyen Kim (ICT);
+   Long Châu (pharmacy). Add GSO CPI (March 2026: 4.65% YoY, Q1 avg:
+   3.51%, core: 3.63%) and fuel prices (RON 95-III 25,540 VND/l;
+   Diesel 28,760 VND/l; 6-10% surcharges). Add guardrail: logistics
+   cost-to-GDP is context only; executor must translate to MWG-specific
+   Board action (e.g., logistics contract renegotiation, distribution
+   centre investment) — not national policy.
 
-2. Section 8 (Du Pont Decomposition):
-   - Add Step 5 as a mandatory ALM Interest Rate Gap Stress-Test.
-   - Instruct executor to quantify: 100 bps rise on 29,931B ST debt
-     ≈ +299B additional interest; TIE falls from 4.81× to approximately
-     4.39×; carry spread compression risk on the 3,107B financial income.
-   - Instruct executor to assess whether MWG's treasury structure is a
-     strategic carry trade or unhedged refinancing risk.
+2. §8 Du Pont: add Step 5 — mandatory ALM stress-test. 100 bps on
+   29,931B ≈ +299B interest; TIE 4.81× → ~4.39×; carry spread
+   compression analysis on 3,107B financial income.
 
-3. Section 9 (Recommendations):
-   - Add a Board-Level Constraint paragraph banning operational
-     micro-management and requiring all 4 recommendations to be
-     actionable by MWG's Board or Group CFO.
-   - Rewrite required coverage areas to focus on: ALM hedging strategy,
-     BHX expansion capital structure, earnings quality and treasury carry
-     dependency, and BHX segment disclosure ahead of IPO.
+3. §9 Recommendations: add Board-Level Constraint with two prohibited
+   categories: (a) micro-management; (b) national policy. Rewrite
+   coverage areas: ALM hedging, BHX capital structure, earnings quality,
+   segment disclosure.
 
-4. Section 2 (Model Architecture):
-   - Add Named Range Prefix Conventions table documenting BAL_*, INC_*,
-     CASH_*, startYear_*, currentYear_*, avg_*, and RATIO_* prefixes.
+4. References: add GSO and Vietnam Petroleum Administration sources.
 
-5. References: Add GSO CPI source and Vietnam Petroleum Administration
-   fuel price source.
-
-6. HIL Review Note: Append Iteration 2 documentation with all three gaps,
-   root causes, Stage 5 consequences, and changes made.
+5. HIL Review Note: append Iteration 2 documentation.
 ```
 
-**What changed from v1.1 to v1.2:**
+**What changed v1.1 → v1.2:**
 
-| Location | v1.1 (gap) | v1.2 (corrected) |
+| Location | v1.1 | v1.2 |
 |---|---|---|
-| Section 2 | Named ranges documented without prefix table | Named Range Prefix Conventions table added |
-| Section 7 — Efficiency benchmarks | Generic HOSE retail sector medians | Mandatory FRT / Nguyen Kim for ICT; Long Châu for pharmacy |
-| Section 7 — Macro data | Qualitative references ("inflation rising") | GSO CPI March 2026: 4.65% YoY; Q1 avg: 3.51%; core: 3.63% |
-| Section 7 — Supply cost | No specific fuel figures | RON 95-III: 25,540 VND/l; Diesel: 28,760 VND/l; 6–10% surcharge |
-| Section 8 — Du Pont | 4 steps; no ALM analysis | Step 5 added: 100 bps shock → +299B interest; TIE 4.81→~4.39× |
-| Section 9 — Recommendations | No scope constraint | Board-Level Constraint paragraph added; operational micro-management AND national policy recommendations explicitly excluded |
-| References | 7 sources | 9 sources (GSO and Vietnam Petroleum Administration added) |
-| HIL Review Note | Iteration 1 only | Iteration 1 + Iteration 2 fully documented |
+| §7 benchmarks | Generic HOSE medians | FRT / Nguyen Kim (ICT); Long Châu (pharmacy) |
+| §7 macro data | Qualitative only | GSO CPI 4.65%; fuel RON 95-III 25,540 VND/l |
+| §7 logistics context | No guardrail | Context only; not policy recommendation |
+| §8 Du Pont | 4 steps | Step 5: ALM 100 bps → TIE 4.39× |
+| §9 Recommendations | No scope constraint | Micro-management + national policy both prohibited |
+| References | 7 | 9 |
 
-**Analyst verification of v1.2:** Confirmed all three gaps addressed. Segment-specific benchmarks present and named. ALM stress-test instructions specific and quantified (100 bps → +299B interest → TIE 4.39×). Macro data anchored to named primary sources. Board-level constraint present. References complete.
+**Analyst verification:** Benchmarks named. ALM quantified. Macro data anchored to primary sources. National policy guardrail present. ✓
+
+---
+
+## Phase 5 — HIL Iteration 3: Named Range Map, Benchmarks & Frontmatter (v1.2 → v1.3)
+
+**Gap 1 — Named Range Conventions not a standalone section:** Prefix conventions table was embedded in §2 Model Architecture. Rubric maps "Named Range Conventions" as an independent Part A item. Without a dedicated section, rubric mappers could not locate it 1-to-1.
+
+**Gap 2 — Incomplete competitor benchmarks:** Pharmacy benchmarked only against Long Châu, omitting Pharmacity. BHX grocery had no domestic operational competitor benchmarks — only an IPO valuation reference.
+
+**Gap 3 — YAML frontmatter artefacts:** `fields_required` and `courses` were template metadata from the LLM's template parsing — not content fields appropriate in a submitted spec.
+
+**Stage 5 consequence if not corrected:** (a) Named Range Map not findable as dedicated section; (b) An Khang benchmarked without Pharmacity; BHX analysis without Winmart+/Co.opmart peer comparison; (c) frontmatter signals LLM artefacts to grader.
+
+### Prompt 5.1 — v1.3 Upgrade Command
+
+```text
+Please upgrade the spec to version 1.3. Three targeted changes only:
+
+1. Extract the Named Range Prefix Conventions table from §2 into a new
+   standalone Part A section "Named Range Map". Expand with a sub-table
+   for the four analyst assumption inputs (share_price, shares_outstanding,
+   cost_capital, tax_rate). Renumber downstream sections +1.
+
+2. §8 Analysis Requirements (Efficiency + Performance):
+   - Pharmacy: add Pharmacity alongside Long Châu; instruct to state
+     exclusion explicitly if per-store data unavailable.
+   - Grocery (BHX): add Winmart+ and Co.opmart as mandatory operational
+     benchmarks in both Performance (M/B context) and Efficiency
+     (store-count economics) sub-sections.
+
+3. YAML: remove fields_required and courses. Retain only: template,
+   purpose, audience, title, author, date, version, company,
+   naming_convention, notes. Update version to "1.3"; update notes
+   to summarise all three iterations.
+
+Append Iteration 3 to HIL Review Note. Do not modify any other content.
+```
+
+**What changed v1.2 → v1.3:**
+
+| Location | v1.2 | v1.3 |
+|---|---|---|
+| Part A structure | Named Range table in §2 | Standalone §3 "Named Range Map" + analyst inputs sub-table; sections renumbered |
+| §8 pharmacy benchmark | Long Châu only | Long Châu + Pharmacity; explicit exclusion instruction |
+| §8 grocery benchmark (Performance + Efficiency) | IPO valuation reference only | Winmart+ and Co.opmart added as mandatory operational benchmarks |
+| YAML frontmatter | `fields_required` + `courses` present | Removed; clean 9-field frontmatter |
+
+**Analyst verification:** Named Range Map present as standalone section. Pharmacity and Winmart+/Co.opmart in §8. YAML contains only substantive fields. ✓
 
 ---
 
 ## Prompt Engineering Observations (Stage 4)
 
-**1. Data-first drafting.** Extracting all financial values from the Stage 3 workbook via openpyxl before writing a single spec sentence prevented the most common Stage 4 failure mode: populating formulas with the right structure but wrong numbers. The spec is only as reliable as the data pipeline feeding it.
+**1. Data-first drafting.** Extracting all workbook values before writing a single spec line prevented right-structure / wrong-numbers failure.
 
-**2. Cross-check ratio outputs against the workbook.** Comparing spec-stated expected output values against actual Ratios tab outputs (C43:C76) caught the market cap unit mismatch in Iteration 1 that would have made MVA and Market-to-Book unusable in Stage 5. This cross-check should be a standard first step in every spec HIL review, before any analytical review begins.
+**2. Cross-check outputs against the workbook.** Comparing spec expected outputs against Ratios!C43:C76 caught the unit mismatch in Iteration 1. Standard first step of every HIL review.
 
-**3. HIL iterations must be scoped separately.** Iteration 1 was a formula/unit correction pass (verifiable against the workbook). Iteration 2 was an analytical completeness pass (requiring analyst knowledge of segment competitors and externally sourced macro data). Mixing both into a single HIL pass would have obscured which gap type was driving each correction.
+**3. Scope HIL iterations separately.** Iteration 1 = formula/unit pass (verifiable). Iteration 2 = analytical completeness pass (required external data). Iteration 3 = structural/rubric-alignment pass. Mixing these would have obscured which gap type drove each correction.
 
-**4. Named-range precision.** Using exact named-range strings (e.g., `currentYear_after_tax_operating_income`, `startYear_total_capitalization`) rather than cell references (e.g., "Ratios!C22") makes the spec robust to any future template restructuring and unambiguous for an LLM executor at Stage 5.
+**4. Named-range precision over cell references.** `currentYear_after_tax_operating_income` instead of "Ratios!C22" — robust to template restructuring and unambiguous for Stage 5.
 
-**5. VAS structural zeros require explicit annotation.** A Stage 5 executor seeing LT Debt Ratio = 0% without context might interpret this as a conservative capital structure. The spec explicitly labels this a VAS accounting artefact (no IFRS 16 equivalent) and directs the executor to use Total Debt Ratio (60.5%) and TIE (4.81×) as the primary leverage signals.
+**5. VAS structural zeros require explicit annotation.** LT Debt = 0% must be labelled a VAS artefact to prevent Stage 5 misinterpreting it as low-leverage signal.
 
-**6. Analyst-sourced external data must be manually injected.** The LLM cannot independently retrieve current GSO CPI figures or Vietnam Petroleum Administration fuel prices. These were sourced by the analyst after v1.1 generation and injected into the v1.2 upgrade prompt. Any spec section that depends on current macroeconomic data requires an explicit analyst input step; it cannot be delegated entirely to the model.
+**6. Analyst-sourced external data must be manually injected.** LLM cannot fetch GSO CPI or Vietnam Petroleum Administration fuel prices. Sourced after v1.1; injected in v1.2 prompt.
 
-**7. Board-level scope constraint prevents output dilution.** Without the explicit Board-level constraint added in v1.2, Stage 5 recommendations risk drifting toward operational micro-management (SKU rationalisation, store-level staffing) rather than capital allocation and financing decisions. The constraint ensures the four recommendations operate at the correct strategic level for a senior finance audience.
+**7. Board-level scope constraint prevents output dilution.** Without the dual exclusion (micro-management + national policy), Stage 5 produced a green logistics corridor recommendation — government-level policy, not a Board action.
+
+**8. Rubric-mapping review catches structural gaps.** Reviewing spec sections against rubric Part A items 1-to-1 (Iteration 3) revealed Named Range Conventions was not findable as a standalone item — invisible from content review alone.
 
 ---
 
