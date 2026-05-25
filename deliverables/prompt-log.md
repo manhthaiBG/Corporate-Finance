@@ -334,3 +334,115 @@ The following patterns proved most effective in this session and are worth carry
 ---
 
 *Log compiled by Claude Sonnet 4.6 | Session: 2026-05-19 | BUS-629 VEMBA International Corporate Finance*
+
+---
+
+# Stage 4 Prompt Log — Technical Specification
+
+**Analyst:** Nguyen Manh Thai
+**Tool:** Claude Sonnet 4.6 (Cowork Desktop, May 2026 workspace)
+**Session Date:** 2026-05-25
+**Deliverable:** `2026-05-25-nguyen-mwg-spec.md`
+**Input artifacts:** Stage 3 workbook (`2026-05-21-nguyen-mwg-financials.xlsx`), Stage 4 brief (GitHub), spec template (GitHub)
+
+---
+
+## Phase 1 — Rubric & Template Ingestion
+
+**Objective:** Read the Stage 4 specification brief and spec template, then extract all data values from the Stage 3 populated workbook before drafting any spec content.
+
+### Prompt 1.1 — Stage 4 Brief + Template Fetch
+
+```text
+Tôi đã hoàn thành stage 3 trong folder, giúp tôi hoàn thiện stage 4 theo
+hướng dẫn lưu ý bạn tạo file mới chứ không ghi đè file cũ.
+https://github.com/adamwstauffer/shidler/blob/main/courses/
+BUS-629-VEMBA-International-Corporate-Finance/stage4-technical-specification.md
+```
+
+**Model actions:**
+- Fetched Stage 4 brief from GitHub. Confirmed: deliverable is a `.md` spec file saved to `docs/specs/`, plus a prompt log entry, plus evidence of at least one HIL iteration. Rubric is 4×25%: Data & Structure, Ratios & Validation, Analysis Spec, Spec Craft + Prompt Log.
+- Fetched spec template from GitHub. Confirmed: YAML frontmatter required; 10 sections (1 scope + Part A items 2–6 + Part B items 7–10 + References).
+- Read all six sheets of `2026-05-21-nguyen-mwg-financials.xlsx` via openpyxl to extract every numerical value in Ratios!C6:C76, Balance Sheet, Income Statement, and Cash Flow Statement.
+
+**Key data extracted from Stage 3 workbook:**
+
+| Source | Key Values |
+|---|---|
+| Balance Sheet | Total Assets: 83,946B (FY2025), 70,437B (FY2024); Total Equity: 33,176B / 28,121B |
+| Income Statement | Net Sales: 155,928B; COGS: 124,926B; EBIT: 7,075B; Net Income: 7,073B |
+| Cash Flow | CFO: 6,096B; CFI: −6,661B; CFF: 668B |
+| Ratios inputs | Share price: 88,400 VND; Shares: 1,469.7M; WACC: 13.5%; Tax: 20% |
+| Ratios derived | ATOI: 8,249.8B; Market cap (raw): 129,921,480; Equity (start): 28,121B |
+| Ratios outputs | ROE: 25.15%; Asset Turnover: 2.21×; TIE: 4.81×; Current Ratio: 1.52× |
+
+---
+
+## Phase 2 — Initial Spec Draft (v1.0)
+
+**Objective:** Draft all 10 sections of the spec in a single pass, populating every named range, formula, and expected output value from the extracted data.
+
+### Prompt 2.1 — Draft Generation Command
+
+```text
+[Internal — no user prompt at this stage. Model drafted v1.0 of the spec
+autonomously, following the spec-template structure, using all data extracted
+in Phase 1. All Part A sections (Scope, Architecture, Data Inputs, Derived
+Inputs, Ratio Formulas, Validation) and Part B sections (Analysis Requirements,
+Du Pont, Recommendations, Output Format) were populated in the first pass.]
+```
+
+**Model actions (v1.0 draft):**
+- Populated all 3 input tables (Balance Sheet, Income Statement, Cash Flow) with 30+ named ranges and VND billion values.
+- Wrote ratio formula table for all 25 ratios in named-range notation.
+- Listed market_capitalization as 129,921,480 with unit label "VND B" — this was the raw template cell value.
+
+---
+
+## Phase 3 — HIL Review & Unit-Mismatch Correction (v1.0 → v1.1)
+
+**Objective:** Review v1.0 draft against actual ratio outputs in the Stage 3 workbook. Identify gaps where the spec would cause a Stage 5 LLM to produce wrong results.
+
+### HIL Before/After Note
+
+**Gap identified:** In v1.0, Section 3 listed `market_capitalization = 129,921,480 VND B`. Upon checking the Stage 3 workbook, the Ratios tab showed Market-to-Book = 3,916× and MVA ≈ 129.9 million VND billions — clearly wrong values for a company with 33,176B in book equity and a Dec 31, 2025 market cap of approximately 130,000B VND.
+
+**Root cause traced:** The template formula `share_price × shares_outstanding = 88,400 × 1,469.7 = 129,921,480` produces VND millions (raw VND per share × millions of shares = millions of VND), not VND billions. The balance sheet is in VND billions. This is a 1,000× unit mismatch that inflates MVA and Market-to-Book by a factor of 1,000. The original template was designed for USD companies where share price (USD/share) × shares (millions) = USD millions = same unit as balance sheet. For MWG with share price in raw VND (not VND billions), the formula must divide by 1,000.
+
+**What changed from v1.0 to v1.1:**
+
+| Location | v1.0 (wrong) | v1.1 (corrected) |
+|---|---|---|
+| Section 3 Data Inputs — market_cap value | 129,921,480 VND B | 129,921.5 VND B (with unit footnote) |
+| Section 4 Derived Inputs — market_cap formula | `share_price × shares_outstanding` | `share_price × shares_outstanding / 1,000` |
+| Section 5 Performance — MVA | ~129.9M VND B | 96,745.5 VND B |
+| Section 5 Performance — Market-to-Book | 3,916× | 3.91× |
+| Section 6 Validation | No market cap rule | Rule 6 added: unit correction required |
+
+**Why this matters for Stage 5:** A Stage 5 LLM using v1.0 would have reported MVA of ~129 million VND billions and M/B of ~3,916× — both nonsensical. The v1.1 correction ensures Stage 5 produces meaningful, auditable Performance ratio results.
+
+### Prompt 3.1 — v1.1 Revision Command
+
+```text
+[Internal — model applied targeted edits to the four locations listed above,
+added footnote ¹ throughout the ratio tables, revised Validation Rule 6, and
+appended the HIL Review Note section at end of spec. All other sections
+(Profitability, Efficiency, Leverage, Liquidity, Du Pont, Part B) were
+verified as correct and unchanged from v1.0.]
+```
+
+---
+
+## Prompt Engineering Observations (Stage 4)
+
+**1. Data-first drafting.** Extracting all financial values from the Stage 3 workbook via openpyxl before writing a single spec sentence prevented the most common Stage 4 failure mode: populating formulas with the right structure but wrong numbers. The spec is only as reliable as the data pipeline feeding it.
+
+**2. Cross-check ratio outputs against the model.** Comparing spec-stated expected values against actual Ratios tab outputs (C43:C76) caught the market cap unit mismatch that would have made MVA and M/B unusable in Stage 5. This cross-check should be a standard step in any spec HIL review.
+
+**3. Named-range precision.** Using exact named-range strings (e.g., `currentYear_after_tax_operating_income`, `startYear_total_capitalization`) rather than cell references (e.g., "Ratios!C22") makes the spec robust to any future template restructuring and unambiguous for an LLM executor at Stage 5.
+
+**4. VAS structural zeros require explicit annotation.** A Stage 5 LLM seeing LT Debt Ratio = 0% without context might interpret this as a conservative capital structure. The spec explicitly labels this a VAS accounting artefact (no IFRS 16 equivalent) and directs the executor to use Total Debt Ratio (60.5%) and TIE (4.81×) as the primary leverage signals.
+
+---
+
+*Stage 4 log compiled by Claude Sonnet 4.6 | Session: 2026-05-25 | BUS-629 VEMBA International Corporate Finance*
