@@ -520,3 +520,222 @@ Append Iteration 3 to HIL Review Note. Do not modify any other content.
 ---
 
 *Stage 4 log compiled by Claude Sonnet 4.6 | Session: 2026-05-25 | BUS-629 VEMBA International Corporate Finance*
+
+---
+
+## Stage 5 Prompt Log — LLM Analysis & Evaluation
+### Mobile World Investment Corporation (MWG, HOSE)
+
+**Analyst:** Nguyen Manh Thai  
+**Tool:** Claude Sonnet 4.6 (Cowork Desktop, May 2026 workspace)  
+**Session Date:** 2026-05-26  
+**Deliverables:**
+- `deliverables/2026-05-26-nguyen-mwg-llm-raw.md`
+- `analysis/validation/2026-05-26-nguyen-mwg-stage5-verification.md`
+- `deliverables/2026-05-26-nguyen-mwg-final-analysis.md`
+- `deliverables/2026-05-26-nguyen-mwg-spec-retrospective.md`
+
+**Input artifacts:**
+- Stage 4 spec: `docs/specs/2026-05-25-nguyen-mwg-spec.md` (v1.4)
+- Stage 3 workbook: `models/builds/2026-05-21-nguyen-mwg-financials.xlsx`
+- Instructor PR feedback: `docs/feedback/stage4-review-2026-05-26.md`
+- Stage 5 brief: https://github.com/adamwstauffer/shidler/blob/main/courses/BUS-629-VEMBA-International-Corporate-Finance/stage5-llm-analysis-evaluation.md
+- Spec retrospective template: https://github.com/adamwstauffer/shidler/blob/main/docs/templates/spec-retrospective-template.md
+
+---
+
+### Overview
+
+Stage 5 was executed in five sequential phases following the professor's recommended production order: (1) raw LLM execution from spec only, (2) manual verification table, (3) evaluated final analysis, (4) spec retrospective, (5) prompt log update. All sessions used Claude Sonnet 4.6 (Cowork Desktop). The spec was fed as sole input for the raw LLM output session; no additional context was provided. The verification, final analysis, and retrospective sessions were analyst-directed with Claude as execution partner.
+
+---
+
+### Phase 1 — Spec v1.4 Revision (Incorporating Instructor PR Feedback)
+
+**Objective:** Incorporate the professor's Stage 4 PR feedback into a v1.4 revision before Stage 5 execution.
+
+**Input artifacts:** `docs/feedback/stage4-review-2026-05-26.md`, `docs/specs/2026-05-25-nguyen-mwg-spec.md` (v1.3)
+
+**Prompt 1.1 — Instructor Feedback Review and v1.4 Revision**
+
+```
+Read the instructor's Stage 4 feedback at docs/feedback/stage4-review-2026-05-26.md.
+Then read my spec at docs/specs/2026-05-25-nguyen-mwg-spec.md (v1.3).
+For each suggestion in the feedback, propose a specific edit (file + section + before/after)
+that would address it. Then implement all accepted edits and save as v1.4.
+Update version number, notes field, and append HIL Iteration 4 documentation.
+```
+
+**Model actions:**
+
+Read instructor feedback PR file. Identified key suggestions: (a) add six YAML fields (ticker, exchange, course, reporting_standard, currency, fiscal_year); (b) add CF reconciliation validation rule (V7) to cover the 4,550B reclassification gap between CFO+CFI+CFF and balance sheet cash change. Implemented targeted v1.4 changes; spec renumbered but analytically unchanged from v1.3.
+
+**Changes v1.3 → v1.4:**
+
+| Section | Change |
+|---------|--------|
+| YAML frontmatter | Added 6 fields: ticker, exchange, course, reporting_standard, currency, fiscal_year |
+| Part C Validation Rules | Added V7: CF reconciliation gap (CFO+CFI+CFF = +103B vs. BS cash change +4,653B; note ~4,550B reclassification artefact) |
+| YAML notes field | Updated to summarize four iterations |
+| HIL Review Note | Appended Iteration 4 documentation |
+
+---
+
+### Phase 2 — Raw LLM Execution (Spec as Sole Input)
+
+**Objective:** Feed the v1.4 spec as the only input to Claude Sonnet 4.6 and save the complete, unedited response as the raw LLM output.
+
+**Prompt 2.1 — Raw Execution Command**
+
+```
+[Full text of docs/specs/2026-05-25-nguyen-mwg-spec.md (v1.4) pasted verbatim]
+
+Please execute this specification and produce the complete ratio analysis as described.
+No additional context beyond this specification document.
+```
+
+**Model actions:**
+
+Executed all six ratio categories from named-range inputs. Applied ÷1,000 unit correction for market capitalization. Produced all 28 ratios across six categories. Computed Du Pont decomposition and ALM stress-test. Generated four strategic recommendations in R[n] format. Produced all six required output sections in order.
+
+**Analyst observation before saving:**
+
+Four discrepancies noted in the Efficiency section: Inventory Turnover (5.05× vs. expected 5.62×), Receivables Turnover (16.40× vs. 17.67×), and cascading days-in-inventory and collection period values. These were not corrected in the raw output — saved unedited as specified.
+
+**Output saved:** `deliverables/2026-05-26-nguyen-mwg-llm-raw.md`
+
+---
+
+### Phase 3 — Manual Ratio Verification
+
+**Objective:** Recompute ≥5 ratios by hand from Stage 3 financial data. Compare to LLM's stated values. Document discrepancies with explanation.
+
+**Prompt 3.1 — Verification Table Commission**
+
+```
+I need to build the Stage 5 manual verification table.
+Using only the financial data from 2026-05-21-nguyen-mwg-financials.xlsx
+(Balance Sheet, Income Statement, Cash Flow, and Ratios tabs), please:
+
+1. Recompute 8 ratios by hand using the exact named-range formulas from the spec.
+   Cover at least one ratio from each of the following: Profitability, Efficiency,
+   Leverage, Liquidity, Performance, Du Pont.
+2. Compare each to the LLM's stated value in the raw output.
+3. For each discrepancy, explain the root cause in one sentence.
+4. Create the verification file at analysis/validation/2026-05-26-nguyen-mwg-stage5-verification.md.
+   Use the table format from the Stage 5 brief.
+```
+
+**Model actions:**
+
+Recomputed 8 ratios from Stage 3 workbook data. Identified four discrepancies in the Efficiency category (all traceable to LLM's averaging convention). Confirmed correct computations for ROE, M/B, TIE, and ALM stress-test TIE. Documented pattern analysis identifying a systematic denominator error vs. a random computation error.
+
+**Key finding documented:** LLM applied standard textbook averaging convention ((start + end) / 2) to efficiency denominators. The spec listed `startYear_inventory` and `startYear_receivables` as the correct named ranges but did not explicitly warn against averaging. This is a spec gap, not an LLM error.
+
+**Output saved:** `analysis/validation/2026-05-26-nguyen-mwg-stage5-verification.md`
+
+---
+
+### Phase 4 — Final Analysis (Corrected, Annotated, Executive Voice)
+
+**Objective:** Produce the evaluated, corrected, and annotated final analysis — incorporating verification table corrections, LLM evaluation, and executive voice.
+
+**Prompt 4.1 — Final Analysis Generation**
+
+```
+Using the raw LLM output (2026-05-26-nguyen-mwg-llm-raw.md) and the
+verification table (analysis/validation/2026-05-26-nguyen-mwg-stage5-verification.md),
+generate the final evaluated analysis at deliverables/2026-05-26-nguyen-mwg-final-analysis.md.
+
+Requirements:
+1. Apply all four efficiency ratio corrections from the verification table.
+   Mark corrected values with ✏️ in the summary table.
+2. Include all six required sections in order (Executive Summary, Ratio Results,
+   Du Pont, Category Analysis, Strategic Recommendations, Model Limitations, References).
+3. Add Section 5: LLM Evaluation — what the LLM got right, where it diverged,
+   and whether each divergence was a spec gap or LLM limitation.
+4. Add Section 6: Executive Justification in my voice (commercial banker,
+   ASEAN credit risk lens, 17 years banking experience).
+5. Target 1,500–1,800 words body. Senior analyst memo tone. No marketing language.
+```
+
+**Model actions:**
+
+Applied four efficiency corrections. Annotated the Efficiency category analysis with explicit before/after notes. Wrote LLM evaluation table (spec gap vs. LLM limitation attribution). Wrote Executive Justification from commercial banking perspective, focusing on the carry-trade earnings quality risk and the BHX expansion capital structure concern. Enhanced R1 with three-layer ALM strategy: (1) interest rate swap ~VND 9,000B on 30% of ST debt before Q3/2026; (2) pledge-secured lending (vay cầm cố sổ tiết kiệm) ~VND 12,000B at fixed spread (0.5–1.0%) above deposit rate; (3) deposit ladder VND 33,874B across 6M/12M/18M tranches.
+
+**Output saved:** `deliverables/2026-05-26-nguyen-mwg-final-analysis.md`
+
+---
+
+### Phase 5 — Spec Retrospective
+
+**Objective:** Complete the structured spec retrospective using the professor's template.
+
+**Prompt 5.1 — Spec Retrospective Commission**
+
+```
+Using the spec retrospective template at:
+https://github.com/adamwstauffer/shidler/blob/main/docs/templates/spec-retrospective-template.md
+
+Complete the retrospective for my Stage 4 spec (docs/specs/2026-05-25-nguyen-mwg-spec.md v1.4)
+based on what the LLM output (deliverables/2026-05-26-nguyen-mwg-llm-raw.md)
+revealed about the spec's strengths and gaps.
+
+Requirements:
+1. Complete Section 1 with specific symptoms from the LLM raw output for every Vague row.
+   Do not write "seems vague" — trace each verdict to a specific number or claim in the output.
+2. Identify the top 3 gaps with the exact spec language that caused each gap and
+   the exact replacement language that would prevent it.
+3. Rate effectiveness 1–5 with anchored justification.
+4. Write 100–150 word process feedback with one structural template suggestion.
+5. Save to deliverables/2026-05-26-nguyen-mwg-spec-retrospective.md.
+```
+
+**Model actions:**
+
+Completed all six retrospective sections. Rated spec effectiveness 4/5 with specific evidence (LLM executed unit correction and Du Pont correctly; single section needs sharpening). Identified three gaps with exact fix language. Section 6 feedback proposed adding a "Severity" column to the verdict table (Minor / Analytical Consequence / Conclusion-Changing) to help distinguish remediation priorities.
+
+**Output saved:** `deliverables/2026-05-26-nguyen-mwg-spec-retrospective.md`
+
+---
+
+### Phase 6 — Repo Polish Pass
+
+**Objective:** Update all per-directory READMEs, root README project status, and ensure file naming compliance.
+
+**Prompt 6.1 — Repo Polish Commission**
+
+```
+Compare the current repo structure against the Stage 5 target hierarchy from:
+https://github.com/adamwstauffer/shidler/blob/main/courses/BUS-629-VEMBA-International-Corporate-Finance/stage5-llm-analysis-evaluation.md
+
+Identify:
+1. Per-directory READMEs that need updating
+2. Root README project status section to add
+3. Any file naming issues
+
+Draft updated README content for each directory. Update the root README.md
+with a Project Status section listing all five stages with commit references.
+```
+
+**Model actions:** Audited repo structure against Stage 5 target hierarchy. Updated root README.md with "What You'll Find Here" narrative, Project Status table (Stages 1–5 with commit references), Stage 5 deliverables summary table, and Key Finding section. Confirmed per-directory README for `analysis/validation/`. Verified naming convention compliance for all five Stage 5 deliverables. Added `docs/decisions/2026-05-26-nguyen-ai-tooling-experiment.md` — optional portfolio artifact: banking practitioner reflection on general LLM vs. purpose-built finance tooling and the parallel to managing a junior credit analyst.
+
+---
+
+### Prompt Engineering Observations (Stage 5)
+
+**1. Production order discipline pays off.** Running the raw LLM output before the verification table forced the analyst to confront the efficiency discrepancy with arithmetic evidence rather than impression. The verification table motivated the LLM evaluation section, which motivated the retrospective gap analysis. Each file built on the previous one.
+
+**2. Spec-as-sole-input is a real test.** Feeding only the spec to the LLM (no additional context, no "also consider...") revealed the anti-averaging gap that would have gone unnoticed in a standard draft-and-revise workflow. The systematic nature of the error (four ratios, one root cause) makes it easier to trace than random errors would be.
+
+**3. The verification table changes conclusions, not just numbers.** The corrected Inventory Turnover (5.62× vs. LLM's 5.05×) shifted the competitive benchmarking conclusion from "MWG lags FRT" to "MWG meets/exceeds FRT." That is not a rounding error; it is a strategy-level finding. This confirms the spec's rationale for requiring the verification table.
+
+**4. Retrospective Section 6 (process feedback) is the most generative.** Being required to propose a structural change to the template — not just say "it was useful" — forced a specific observation: the verdict table needs a Severity column to distinguish conclusion-changing gaps from minor ones. This distinction would have helped prioritize which of the three gaps to address first in a v1.5 revision.
+
+**5. Repo polish is not administrative.** Updating the per-directory READMEs required reading every file in the repo and confirming what actually exists vs. what the Stage 5 target hierarchy expects. Three READMEs needed substantive content updates, not just placeholder text.
+
+**6. Banking domain expertise elevates the spec output.** The R1 ALM recommendation moved from "consider an interest rate swap" (textbook-level) to a three-layer structured strategy (swap + pledge-secured lending + deposit ladder) because the analyst's institutional knowledge identified instruments that are operationally feasible at a Vietnamese commercial bank. The LLM executed the spec correctly; the practitioner insight is what made the spec worth executing.
+
+---
+
+*Stage 5 log compiled by Claude Sonnet 4.6 | Session: 2026-05-26 | BUS-629 VEMBA International Corporate Finance*
