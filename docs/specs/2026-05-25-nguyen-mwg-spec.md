@@ -5,10 +5,20 @@ audience: Adam Stauffer (BUS-629 instructor); EMBA peers
 title: "Mobile World Investment Corporation (MWG) — FY2025 Performance Ratios Technical Specification"
 author: Nguyen Manh Thai
 date: 2026-05-25
-version: "1.3"
+version: "1.4"
 company: "Mobile World Investment Corporation (MWG, HOSE)"
+ticker: MWG
+exchange: HOSE
+course: BUS-629
+reporting_standard: VAS
+currency: VND billions
+fiscal_year: "FY2025"
 naming_convention: YYYY-MM-DD-{slug}.md
 notes: >
+  Version 1.4: Added 6 YAML fields (ticker, exchange, course, reporting_standard, currency,
+  fiscal_year) per instructor Stage 4 feedback; added Validation Rule V7 documenting CF
+  reconciliation gap (CFO+CFI+CFF = +103B vs. BS cash change +4,653B, ~4,550B from
+  reclassification between cash and short-term financial investments).
   Version 1.3: (1) Named Range Map extracted into standalone Part A section; (2) Pharmacity added
   as second pharmacy benchmark alongside Long Châu; (3) Winmart+ and Co.opmart added as BHX grocery
   benchmarks; (4) YAML frontmatter cleaned. Version 1.2 added segment-specific benchmarks
@@ -21,7 +31,7 @@ notes: >
 
 **Author:** Nguyen Manh Thai
 **Date:** 2026-05-25
-**Version:** 1.3 (HIL Iteration 3 — named range map, pharmacy/grocery benchmarks, frontmatter cleanup)
+**Version:** 1.4 (Stage 4 instructor feedback — YAML fields + V7 CF reconciliation rule)
 **Company:** Mobile World Investment Corporation · Ticker: MWG · Exchange: Ho Chi Minh Stock Exchange (HOSE)
 
 ---
@@ -266,7 +276,7 @@ All derived inputs are computed in Ratios tab rows 12–38.
 
 ### 7. Validation Rules
 
-The Stage 5 executor must verify all six rules before proceeding to analysis. Flag any breach; do not suppress.
+The Stage 5 executor must verify all seven rules before proceeding to analysis. Flag any breach; do not suppress.
 
 | # | Rule | Check | Tolerance |
 |---|---|---|---|
@@ -276,6 +286,7 @@ The Stage 5 executor must verify all six rules before proceeding to analysis. Fl
 | 4 | **Du Pont ROA** | `RATIO_operating_profit_margin × RATIO_asset_turnover ≈ RATIO_roa` → 5.29% × 2.21 = 11.69% ≈ 11.71% ✓ | ≤ 0.5% |
 | 5 | **Du Pont ROE** | `RATIO_leverage × RATIO_asset_turnover × RATIO_operating_profit_margin × RATIO_debt_burden ≈ RATIO_roe` → 2.53 × 2.21 × 5.29% × 0.857 = 25.34% ≈ 25.15% ✓ | ≤ 0.5% |
 | 6 | **Market cap unit correction** | `market_capitalization (VND B) = share_price × shares_outstanding / 1,000 = 88,400 × 1,469.7 / 1,000 = 129,921.5B`. Raw template cell C12 = 129,921,480 (VND millions — wrong). MVA and M/B must use the ÷1,000 corrected value. | Unit match required |
+| 7 | **CF reconciliation gap** | `CASH_operating + CASH_investments + CASH_financing = 6,096 − 6,661 + 668 = +103B` (net cash flow per CF statement). Balance Sheet cash change: `BAL_cash_marketable_securities_curr − BAL_cash_marketable_securities_prior = 38,874 − 34,221 = +4,653B`. **Gap = 4,550B** — this is expected and not an error. Under VAS, short-term financial investments (fixed deposits) are classified within `BAL_cash_marketable_securities` but are excluded from the narrow "cash and cash equivalents" definition used in the Cash Flow Statement. Do not flag this as a reconciliation breach; document it as a VAS classification artefact. | Informational — do not suppress, do not treat as error |
 
 ---
 
