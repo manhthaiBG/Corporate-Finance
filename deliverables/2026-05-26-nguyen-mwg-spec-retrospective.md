@@ -95,9 +95,17 @@ If I re-ran with a revised spec, three targeted changes would address the gaps a
 
 ## 4. Effectiveness Rating
 
+| Rating | Anchor |
+|--------|--------|
+| **5** | I would hand this spec to a junior analyst and trust their output without re-checking. |
+| **4** | Solid overall; one section needs sharpening before I'd ship it. |
+| **3** | Workable with revisions; spec has gaps the LLM had to guess around. |
+| **2** | Substantial rework needed; LLM output diverged in meaningful ways traceable to the spec. |
+| **1** | Spec is not yet usable as a standalone artifact. |
+
 **My rating: 4**
 
-**Justification:**
+**Justification (100–200 words):**
 
 The spec achieved its primary objective: the LLM produced a structurally correct, Board-appropriate analysis of MWG FY2025 across all six ratio categories, with accurate Du Pont decomposition, correct unit-correction application (the hardest single instruction in the spec), and four properly scoped strategic recommendations. This is strong performance against a complex analytical brief. A grader who read only the strategic recommendations section would conclude the spec worked.
 
