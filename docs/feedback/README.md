@@ -6,6 +6,7 @@ This directory holds instructor PR review files and student response memos for t
 |------|-------|---------|
 | `stage4-review-2026-05-26.md` | Stage 4 | Instructor feedback on the MWG technical specification (v1.3) — delivered via PR from branch `stage4-review-2026-05-26` |
 | `stage4-response-2026-05-27.md` | Stage 4 | Student response confirming incorporation of Stage 4 feedback into spec v1.4 (YAML fields + V7 CF reconciliation rule; commit `dd17ea8`) |
+| `stage5-review-2026-05-27.md` | Stage 5 | Instructor feedback on the Stage 5 final analysis, verification table, and spec retrospective — delivered via PR from branch `stage5-review-2026-05-27` and merged 2026-05-27 |
 
 **Naming convention:** `stage{N}-{type}-YYYY-MM-DD.md`, where `{type}` is either `review` (instructor-authored) or `response` (student-authored).
 
