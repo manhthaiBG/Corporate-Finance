@@ -133,9 +133,9 @@ Already covered in Section 3. The key takeaway: MWG's ROE decomposition is asset
 
 ---
 
-## 5. LLM Evaluation & Annotations
+## 5. LLM Evaluation
 
-### What the LLM executed correctly
+### 5.1 Annotations — What the LLM Executed Correctly
 
 - **Unit correction (Validation Rule 6):** The LLM correctly applied the ÷1,000 market capitalization conversion, computing M/B = 3.91× and MVA = 96,745.5B. This was the most important validation rule; failure here would have invalidated the entire Performance section.
 - **Profitability ratios:** All ROA, ROC, ROE (start-year and average bases) were computed correctly using the specified named ranges.
@@ -145,7 +145,7 @@ Already covered in Section 3. The key takeaway: MWG's ROE decomposition is asset
 - **Strategic recommendation structure:** All four recommendations followed the R[n] format, included ratio evidence, observation, recommendation, and risk consequence.
 - **Board-level scope:** Three of four recommendations were appropriately scoped to Board-level capital allocation decisions. The treasury carry-income recommendation (R3) was slightly broad in its vendor payment terms language but remained within Board-level authority.
 
-### Where the LLM diverged
+### 5.2 Annotations — Where the LLM Diverged
 
 **Systematic error — efficiency ratio denominators (spec gap):**  
 All four efficiency errors (Receivables Turnover, Average Collection Period, Inventory Turnover, Days in Inventory) stem from a single cause: the LLM applied standard textbook averaging conventions ((start + end) / 2) to the denominator, rather than the spec's explicitly stated start-of-year requirement (`startYear_receivables`, `startYear_inventory`). The spec did name these named ranges correctly in the formulas table, but did not explicitly flag the distinction from the averaging convention in a separate instruction. This is a spec-level gap, not an LLM-level failure. The LLM was applying reasonable default behavior. The spec retrospective documents the exact language that would prevent this in a revised spec.
@@ -171,7 +171,9 @@ All four efficiency errors (Receivables Turnover, Average Collection Period, Inv
 
 > All recommendations are sourced from and improve upon the LLM's draft. Minor annotation enhancements are noted in italics.
 
-### R1: Execute a Three-Layer ALM Strategy to Lock the Carry Spread and Cap Debt Repricing Risk
+### R1 — ALM Three-Layer Strategy
+
+*Execute a Three-Layer ALM Strategy to Lock the Carry Spread and Cap Debt Repricing Risk*
 
 - **Ratio evidence:** TIE = 4.81×; ALM stress-test: 100 bps shock → TIE 4.00×; 150 bps shock → TIE ~3.55×; ST Borrowings = VND 29,931B; Cash & ST investments = VND 38,874B (of which ~VND 33,874B in fixed-term deposits); Financial Income = VND 3,107B (36% of EBT)
 - **Observation:** MWG's entire VND 29,931 billion debt is short-term floating rate, while the deposit book is concentrated in single-tranche fixed-term placements. In Q1/2026's tightening cycle, borrowing rates reprice upward immediately upon rollover; if deposit maturities don't roll in tandem, the carry spread compresses from both sides simultaneously — eliminating VND 3,107B in financial income with no warning.
@@ -185,21 +187,26 @@ All four efficiency errors (Receivables Turnover, Average Collection Period, Inv
 
 - **Risk if not acted upon:** A 150 bps rate shock without these structures compresses TIE to ~3.55× while simultaneously eroding the VND 3,107B financial income buffer — a double hit to Net Margin that would reduce FY2026 reported profit by VND 750–900B and trigger a sharp EPS revision immediately ahead of the BHX IPO process.
 
-### R2: Structure BHX Northern Expansion via Standalone Segment Equity Raise, Not Group-Level Borrowing
+### R2 — BHX Standalone Equity Raise
+
+*Structure BHX Northern Expansion via Standalone Segment Equity Raise, Not Group-Level Borrowing*
 
 - **Ratio evidence:** Total Debt Ratio = 60.5%; Asset Turnover = 2.21×; Du Pont sensitivity: 10% asset expansion → AT ~2.01× → ~2 pp ROE compression
 - **Observation:** Funding BHX Northern rollout through additional group-level short-term debt would push Total Debt Ratio toward 65%+, compress asset turnover below 2.0×, and cascade into a ~2 percentage point ROE reduction before BHX revenue catches up with the capital deployed.
 - **Recommendation:** Authorize the BHX business unit to conduct a standalone minority equity raise (target: VND 5,000–8,000 billion from strategic grocery-sector or PE investors) to fund the FY2026–2027 Northern rollout, ring-fencing expansion capital from the consolidated balance sheet and preserving group Total Debt Ratio below 60%.
 - **Risk if not acted upon:** Group leverage exceeds 65% Total Debt Ratio, constraining the ICT segment's seasonal working capital headroom during Q3–Q4 smartphone launch cycles, when TGDĐ/DMX require maximum inventory financing flexibility.
 
-### R3: Board Resolution Requiring Separate Disclosure of Financial Income and a Target Cap on Carry-Trade Dependency
+### R3 — Financial Income Disclosure & Carry-Trade Cap
 
+*Board Resolution Requiring Separate Disclosure of Financial Income and a Target Cap on Carry-Trade Dependency*
 - **Ratio evidence:** Operating Profit Margin = 5.29%; Net Profit Margin = 4.54% (*unusual: net margin below operating margin only explainable by financial income boosting EBIT-equivalent but not captured in ATOI*); Financial Income = VND 3,107B (~36% of EBT)
 - **Observation:** The VND 3,107 billion treasury carry income (depositing at ~6–7% while borrowing at ~5%) has structurally propped net income in FY2025. This income is directly rate-sensitive: if the carry spread compresses to zero in Q1/2026 tightening, Net Margin falls from 4.54% to approximately 2.9% — a 36% decline with no forewarning in consolidated income statements.
 - **Recommendation:** Issue a Board resolution requiring (a) separate quarterly disclosure of financial income as a distinct line in earnings releases, with explicit earnings quality context; (b) an internal target ceiling of VND 2,000 billion in annual financial income dependency by FY2027 (reducing reliance from 36% to ~22% of EBT); and (c) a mandate to grow retail EBIT by at least VND 1,100 billion annually to offset the planned carry-income drawdown.
 - **Risk if not acted upon:** Carry-spread compression eliminates VND 3,107 billion of net income without warning, triggering a sharp earnings-per-share revision that damages MWG's credibility with institutional investors immediately ahead of the BHX IPO process.
 
-### R4: Approve BHX Segment-Level Financial Reporting to Eliminate the Conglomerate Valuation Discount
+### R4 — Segment-Level Financial Reporting
+
+*Approve BHX Segment-Level Financial Reporting to Eliminate the Conglomerate Valuation Discount*
 
 - **Ratio evidence:** MVA = VND 96,745.5B; M/B = 3.91×; BHX estimated standalone IPO valuation ~VND 80,000B (~61% of market cap at VND 129,921.5B total)
 - **Observation:** MWG's blended M/B of 3.91× embeds a structural conglomerate discount: the market cannot independently value BHX (grocery), An Khang (pharmacy), and TGDĐ/DMX (ICT) without segment-level financial statements. Winmart+ (nearest listed grocery peer) trades at ~4.2× book — suggesting BHX's grocery operations may justify a higher standalone multiple than the consolidated entity receives.
