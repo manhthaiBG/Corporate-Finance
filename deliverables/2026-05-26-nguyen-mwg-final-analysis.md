@@ -19,7 +19,7 @@ spec_retrospective: deliverables/2026-05-26-nguyen-mwg-spec-retrospective.md
 **Company:** Mobile World Investment Corporation · Ticker: MWG · Exchange: HOSE  
 **Data source:** Audited Consolidated Financial Statements FY2025 (VAS); Stage 3 workbook `2026-05-21-nguyen-mwg-financials.xlsx`
 
-> **LLM Evaluation Note:** This final analysis corrects four systematic errors in the raw LLM output (`2026-05-26-nguyen-mwg-llm-raw.md`). The LLM applied averaging conventions (start + end / 2) to efficiency ratio denominators, whereas the spec requires start-of-year values (`startYear_receivables`, `startYear_inventory`). All corrected values are sourced from the verification table (`2026-05-26-nguyen-mwg-stage5-verification.md`). See Section 5 (LLM Evaluation) for a full accounting of what the LLM got right, where it diverged, and the cause. See also the spec retrospective for the spec-level gaps that enabled this category of error.
+> **LLM Evaluation Note:** This final analysis corrects four systematic errors in the raw LLM output (`2026-05-26-nguyen-mwg-llm-raw.md`). The LLM applied averaging conventions (start + end / 2) to efficiency ratio denominators, whereas the spec requires start-of-year values (`startYear_receivables`, `startYear_inventory`). All corrected values are sourced from the verification table (`2026-05-26-nguyen-mwg-stage5-verification.md`). See Section 5 (LLM Evaluation) for a full accounting of what the LLM got right, where it diverged, and the cause. See also the [spec retrospective](deliverables/2026-05-26-nguyen-mwg-spec-retrospective.md) for the spec-level gaps that enabled this category of error.
 
 ---
 
@@ -129,11 +129,11 @@ Current Ratio of 1.52× is adequate (retail minimum 1.2×). Quick Ratio of 0.97�
 
 ### 4.6 Du Pont Summary
 
-Already covered in Section 3. The key takeaway: MWG's ROE decomposition is asset-turnover-led, leverage-supported, and margin-limited. The Debt Burden below 1.0× is structurally unusual and reflects carry-income dependency. BHX expansion will test Asset Turnover in FY2026–2027 before it creates EVA.
+MWG's ROE of 25.34% (Du Pont) decomposes as: Financial Leverage (2.53×) × Asset Turnover (2.21×) × Operating Profit Margin (5.29%) × Debt Burden (0.857×). The dominant driver is Asset Turnover — capital efficiency rather than margin expansion. Leverage contributes meaningfully (2.53×) but is constrained by the all-short-term debt structure analysed in Section 4.4. Operating Profit Margin of 5.29% is structurally thin for a multi-segment retailer and compresses further once financial income is stripped from the income statement. The Debt Burden below 1.0× is structurally unusual: it reflects the gap between net income (VND 7,073B) and ATOI (VND 8,250B) caused by carry-income flowing through net income but not ATOI, revealing carry-income dependency in the ratio mechanics themselves. BHX Northern expansion will compress Asset Turnover in FY2026–2027 before store maturation generates EVA — the single greatest near-term risk to MWG's Du Pont profile. Full decomposition and ALM sensitivity analysis are in Section 3.
 
 ---
 
-## 5. LLM Evaluation
+## 5. LLM Evaluation & Annotations
 
 ### 5.1 Annotations — What the LLM Executed Correctly
 
